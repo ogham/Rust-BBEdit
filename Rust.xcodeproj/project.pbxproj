@@ -1,0 +1,173 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B55C16E319FC0D3800FE9D6A /* rust.mm in Sources */ = {isa = PBXBuildFile; fileRef = B55C16E119FC0D3800FE9D6A /* rust.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5F05134505A0957400BD0E76 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
+		B55C16E119FC0D3800FE9D6A /* rust.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = rust.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* Hello World */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77ADFE841716C02AAC07 /* Source */,
+				5F05134505A0957400BD0E76 /* info.plist */,
+			);
+			name = "Hello World";
+			sourceTree = "<group>";
+		};
+		08FB77ADFE841716C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				B55C16E119FC0D3800FE9D6A /* rust.mm */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5F05133905A0957400BD0E76 /* Rust */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E4F91CD0863164B009D6578 /* Build configuration list for PBXNativeTarget "Rust" */;
+			buildPhases = (
+				5F05133F05A0957400BD0E76 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rust;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = "Hello World";
+			productReference = B57F6C2519FD60C000FDB959 /* Rust.bblm */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = 2E4F91D10863164B009D6578 /* Build configuration list for PBXProject "Rust" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* Hello World */;
+			productRefGroup = 089C166AFE841209C02AAC07 /* Hello World */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5F05133905A0957400BD0E76 /* Rust */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5F05133F05A0957400BD0E76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B55C16E319FC0D3800FE9D6A /* rust.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2E4F91CE0863164B009D6578 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_MODE_FLAG = "ug+w,o-w,a+rX";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = Rust;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx10.10;
+				USER_HEADER_SEARCH_PATHS = "/Volumes/BBEdit\\ SDK/Interfaces/Language\\ Modules/";
+				WRAPPER_EXTENSION = bblm;
+			};
+			name = Debug;
+		};
+		2E4F91CF0863164B009D6578 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_MODE_FLAG = "ug+w,o-w,a+rX";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = Rust;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx10.10;
+				USER_HEADER_SEARCH_PATHS = "/Volumes/BBEdit\\ SDK/Interfaces/Language\\ Modules/";
+				WRAPPER_EXTENSION = bblm;
+			};
+			name = Release;
+		};
+		2E4F91D20863164B009D6578 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.10;
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		2E4F91D30863164B009D6578 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				SDKROOT = macosx10.10;
+				VALID_ARCHS = i386;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2E4F91CD0863164B009D6578 /* Build configuration list for PBXNativeTarget "Rust" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E4F91CE0863164B009D6578 /* Debug */,
+				2E4F91CF0863164B009D6578 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2E4F91D10863164B009D6578 /* Build configuration list for PBXProject "Rust" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E4F91D20863164B009D6578 /* Debug */,
+				2E4F91D30863164B009D6578 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}
