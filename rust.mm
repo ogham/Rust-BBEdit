@@ -159,7 +159,7 @@ SInt32 skipNumber(BBLMTextIterator &iter)
     
     while ((ch = iter.GetNextChar()))
     {
-        if (isdigit(ch))
+        if (isdigit(ch) || (ch == '_' && length > 0))
         {
             length++;
         }
