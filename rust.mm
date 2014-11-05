@@ -423,6 +423,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
     SInt32 runLen;
     
     UniChar ch;
+    bool wordchr = false;
     while ((ch = iter.GetNextChar()))
     {
         if (ch == '"')
@@ -527,7 +528,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             runStart = iter.Offset();
         }
         
-        else if (isupper(ch))
+        else if (!wordchr && isupper(ch))
         {
             iter--;
             if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
@@ -537,7 +538,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             runStart = iter.Offset();
         }
         
-        else if (isdigit(ch))
+        else if (!wordchr && isdigit(ch))
         {
             iter--;
             if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
@@ -546,6 +547,8 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!addRun(kBBLMNumberRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
+        
+        wordchr = isalpha(ch) || isdigit(ch);
     }
     
     makeCodeRun(iter, runStart, *callbacks);
