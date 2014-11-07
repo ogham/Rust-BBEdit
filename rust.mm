@@ -1,6 +1,7 @@
 #include <cstring>
 #include <stack>
 
+#include <Foundation/Foundation.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 
@@ -12,6 +13,7 @@
 static NSString* const identifierColour = @"me.bsago.bblm.rust.identifier";
 static NSString* const attributeColour = @"me.bsago.bblm.rust.attribute";
 static NSString* const lifetimeColour = @"me.bsago.bblm.rust.lifetime";
+static NSString* const functionColour = @"me.bsago.bblm.rust.function";
 
 static bool addRun(NSString *kind, int  start,int len , const BBLMCallbackBlock& bblm_callbacks)
 {
@@ -491,6 +493,24 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             }
         }
         
+        else if (ch == 'f')
+        {
+            ch = iter.GetNextChar();
+            if (ch == 'n')
+            {
+                if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                runStart = iter.Offset();
+                runLen = skipWhitespace(iter);
+                runLen += skipWord(iter);
+                if (!addRun(functionColour, runStart, runLen, *callbacks)) return noErr;
+                runStart = iter.Offset();
+            }
+            else if (ch)
+            {
+                iter--;
+            }
+        }
+        
         else if (ch == '/')
         {
             ch = iter.GetNextChar();
@@ -555,8 +575,29 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
     return noErr;
 }
 
+static bool isSpecialKind(NSString* kind)
+{
+    return [kBBLMBlockCommentRunKind isEqualToString:kind]
+        || [kBBLMLineCommentRunKind isEqualToString:kind]
+        || [identifierColour isEqualToString:kind]
+        || [attributeColour isEqualToString:kind]
+        || [lifetimeColour isEqualToString:kind];
+}
+
 OSErr adjustRange(BBLMParamBlock &params, const BBLMCallbackBlock &callbacks)
 {
+    DescType language;
+    NSString* kind;
+    SInt32 charPos;
+    SInt32 length;
+    UInt32 index = params.fAdjustRangeParams.fStartIndex;
+    
+    while (index > 0 && bblmGetRun(&callbacks, index, language, kind, charPos, length) && isSpecialKind(kind))
+    {
+        index--;
+    }
+    
+    params.fAdjustRangeParams.fStartIndex = index;
     return noErr;
 }
 

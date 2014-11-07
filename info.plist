@@ -45,6 +45,8 @@
 				<string>Identifier</string>
 				<key>me.bsago.bblm.rust.attribute</key>
 				<string>#[attribute]</string>
+				<key>me.bsago.bblm.rust.function</key>
+				<string>fn function</string>
 			</dict>
 			<key>BBLMRunColors</key>
 			<dict>
@@ -54,6 +56,8 @@
 				<string>rgb(177, 13, 201)</string>
 				<key>me.bsago.bblm.rust.identifier</key>
 				<string>rgb(61, 153, 112)</string>
+				<key>me.bsago.bblm.rust.function</key>
+				<string>rgb(219, 135, 2)</string>
 			</dict>
 			<key>BBLMKeywords</key>
 			<array>
