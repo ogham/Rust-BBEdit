@@ -1,5 +1,5 @@
-BBEdit package for Rust
-=======================
+BBEdit language module for Rust
+===============================
 
 This is a BBEdit 11 Language Module for [Rust](http://www.rust-lang.org). It provides the following features:
 
@@ -17,18 +17,11 @@ By default, it highlights anything beginning with a capital letter in a certain 
 
 The simplest way is to just download the package and put it in this folder:
 
-    ~/Application Support/BBEdit/Packages/
+    ~/Application Support/BBEdit/Language Modules
 
 Then restart your BBEdit and it should be picked up.
 
 ### Compilation
 
-To compile your own version, you'll need Xcode. The default schema outputs a `.bblm`, which you'll have to turn into the package manually for now (sorry about that).
+To compile your own version, you'll need Xcode. The default schema outputs a `.bblm`. You'll also need the BBEdit SDK. The project assumes it's mounted under `/Volumes/BBEdit SDK`.
 
-In order to compile it, you'll need the BBEdit SDK. The project assumes it's mounted under `/Volumes/BBEdit SDK`.
-
-### TODO
-
-- Code folding
-- Snippets
-- Cargo integration
