@@ -153,6 +153,27 @@ SInt32 skipAttribute(BBLMTextIterator &iter)
     return length;
 }
 
+SInt32 skipUse(BBLMTextIterator &iter)
+{
+    SInt32 length = 0;
+    UniChar ch;
+    
+    while ((ch = iter.GetNextChar()))
+    {
+        if (islower(ch) || ch == ':' || ch == '_')
+        {
+            length++;
+        }
+        else
+        {
+            iter--;
+            break;
+        }
+    }
+    
+    return length;
+}
+
 SInt32 skipNumber(BBLMTextIterator &iter)
 {
     UInt32 length = 0;
@@ -493,7 +514,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             }
         }
         
-        else if (ch == 'f')
+        else if (!wordchr && ch == 'f')
         {
             ch = iter.GetNextChar();
             if (ch == 'n')
@@ -504,6 +525,37 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 runLen += skipWord(iter);
                 if (!addRun(functionColour, runStart, runLen, *callbacks)) return noErr;
                 runStart = iter.Offset();
+            }
+            else if (ch)
+            {
+                iter--;
+            }
+        }
+        
+        else if (!wordchr && ch == 'u')
+        {
+            ch = iter.GetNextChar();
+            if (ch == 's')
+            {
+                ch = iter.GetNextChar();
+                if (ch == 'e')
+                {
+                    if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                    runStart = iter.Offset();
+                    runLen = skipWhitespace(iter);
+                    runLen += skipUse(iter);
+                    if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
+
+                    runStart = iter.Offset();
+                    runLen = skipWord(iter);
+                    if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
+
+                    runStart = iter.Offset();
+                }
+                else if (ch)
+                {
+                    iter--;
+                }
             }
             else if (ch)
             {
