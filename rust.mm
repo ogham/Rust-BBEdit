@@ -161,7 +161,7 @@ SInt32 skipNumber(BBLMTextIterator &iter)
     
     while ((ch = iter.GetNextChar()))
     {
-        if (isdigit(ch) || (ch == '_' && length > 0))
+        if (isdigit(ch) || ((ch == '_' || ch == '.') && length > 0))
         {
             length++;
         }
@@ -581,7 +581,8 @@ static bool isSpecialKind(NSString* kind)
         || [kBBLMLineCommentRunKind isEqualToString:kind]
         || [identifierColour isEqualToString:kind]
         || [attributeColour isEqualToString:kind]
-        || [lifetimeColour isEqualToString:kind];
+        || [lifetimeColour isEqualToString:kind]
+        || [functionColour isEqualToString:kind];
 }
 
 OSErr adjustRange(BBLMParamBlock &params, const BBLMCallbackBlock &callbacks)
