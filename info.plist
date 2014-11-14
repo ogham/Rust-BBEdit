@@ -46,10 +46,14 @@
 				<key>me.bsago.bblm.rust.attribute</key>
 				<string>#[attribute]</string>
 				<key>me.bsago.bblm.rust.function</key>
-				<string>fn function</string>
+				<string>fn functionname</string>
+				<key>me.bsago.bblm.rust.module</key>
+				<string>mod modulename</string>
 			</dict>
 			<key>BBLMRunColors</key>
 			<dict>
+				<key>me.bsago.bblm.rust.module</key>
+				<string>rgb(135, 2, 219)</string>
 				<key>me.bsago.bblm.rust.lifetime</key>
 				<string>rgb(133, 20, 75)</string>
 				<key>me.bsago.bblm.rust.attribute</key>

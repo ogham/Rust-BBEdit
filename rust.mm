@@ -14,6 +14,7 @@ static NSString* const identifierColour = @"me.bsago.bblm.rust.identifier";
 static NSString* const attributeColour = @"me.bsago.bblm.rust.attribute";
 static NSString* const lifetimeColour = @"me.bsago.bblm.rust.lifetime";
 static NSString* const functionColour = @"me.bsago.bblm.rust.function";
+static NSString* const moduleColour = @"me.bsago.bblm.rust.module";
 
 static bool addRun(NSString *kind, int  start,int len , const BBLMCallbackBlock& bblm_callbacks)
 {
@@ -513,6 +514,32 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 }
             }
         }
+       
+        else if (!wordchr && ch == 'm')
+        {
+            ch = iter.GetNextChar();
+            if (ch == 'o')
+            {
+                ch = iter.GetNextChar();
+                if (ch == 'd')
+                {
+                    if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                    runStart = iter.Offset();
+                    runLen = skipWhitespace(iter);
+                    runLen += skipWord(iter);
+                    if (!addRun(moduleColour, runStart, runLen, *callbacks)) return noErr;
+                    runStart = iter.Offset();
+                }
+                else if (ch)
+                {
+                    iter--;
+                }
+            }
+            else if (ch)
+            {
+                iter--;
+            }
+        }
         
         else if (!wordchr && ch == 'f')
         {
@@ -610,6 +637,25 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             runStart = iter.Offset();
         }
         
+        else if (!wordchr && (ch == '+' || ch == '-'))
+        {
+            ch = iter.GetNextChar();
+            if (isdigit(ch))
+            {
+                iter -= 2;
+                if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                iter++;
+                runStart = iter.Offset() - 1;
+                runLen = skipNumber(iter) + 1;
+                if (!addRun(kBBLMNumberRunKind, runStart, runLen, *callbacks)) return noErr;
+                runStart = iter.Offset();
+            }
+            else if (ch)
+            {
+                iter--;
+            }
+        }
+        
         else if (!wordchr && isdigit(ch))
         {
             iter--;
@@ -627,7 +673,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
     return noErr;
 }
 
-static bool isSpecialKind(NSString* kind)
+/*static bool isSpecialKind(NSString* kind)
 {
     return [kBBLMBlockCommentRunKind isEqualToString:kind]
         || [kBBLMLineCommentRunKind isEqualToString:kind]
@@ -635,7 +681,7 @@ static bool isSpecialKind(NSString* kind)
         || [attributeColour isEqualToString:kind]
         || [lifetimeColour isEqualToString:kind]
         || [functionColour isEqualToString:kind];
-}
+}*/
 
 OSErr adjustRange(BBLMParamBlock &params, const BBLMCallbackBlock &callbacks)
 {
@@ -645,7 +691,7 @@ OSErr adjustRange(BBLMParamBlock &params, const BBLMCallbackBlock &callbacks)
     SInt32 length;
     UInt32 index = params.fAdjustRangeParams.fStartIndex;
     
-    while (index > 0 && bblmGetRun(&callbacks, index, language, kind, charPos, length) && isSpecialKind(kind))
+    while (index > 0 && bblmGetRun(&callbacks, index, language, kind, charPos, length)/* && isSpecialKind(kind)*/)
     {
         index--;
     }
