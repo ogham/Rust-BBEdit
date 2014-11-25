@@ -180,14 +180,24 @@ SInt32 skipNumber(BBLMTextIterator &iter)
     UInt32 length = 0;
     UniChar ch = iter.GetNextChar();
     bool hasSuffix = false;
-    bool isHex = false;
+    int base = 10;
     
     if (ch == '0')
     {
         ch = iter.GetNextChar();
         if (ch == 'x')
         {
-            isHex = true;
+            base = 16;
+            length += 2;
+        }
+        else if (ch == 'b')
+        {
+            base = 2;
+            length += 2;
+        }
+        else if (ch == 'o')
+        {
+            base = 8;
             length += 2;
         }
         else if (ch)
@@ -203,11 +213,19 @@ SInt32 skipNumber(BBLMTextIterator &iter)
     
     while ((ch = iter.GetNextChar()))
     {
-        if (isdigit(ch) || ((ch == '_' || ch == '.') && length > 0))
+        if ((base == 10) && (isdigit(ch) || ((ch == '_' || ch == '.') && length > 0)))
         {
             length++;
         }
-        else if (isHex && ((ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F')))
+        else if ((base == 2) && (ch == '0' || ch == '1'))
+        {
+            length++;
+        }
+        else if ((base == 8) && (ch >= '0' && ch <= '7'))
+        {
+            length++;
+        }
+        else if ((base == 16) && ((ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F') || isdigit(ch)))
         {
             length++;
         }
