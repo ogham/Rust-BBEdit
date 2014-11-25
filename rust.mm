@@ -178,12 +178,36 @@ SInt32 skipUse(BBLMTextIterator &iter)
 SInt32 skipNumber(BBLMTextIterator &iter)
 {
     UInt32 length = 0;
-    UniChar ch;
+    UniChar ch = iter.GetNextChar();
     bool hasSuffix = false;
+    bool isHex = false;
+    
+    if (ch == '0')
+    {
+        ch = iter.GetNextChar();
+        if (ch == 'x')
+        {
+            isHex = true;
+            length += 2;
+        }
+        else if (ch)
+        {
+            length++;
+            iter--;
+        }
+    }
+    else if (ch)
+    {
+        iter--;
+    }
     
     while ((ch = iter.GetNextChar()))
     {
         if (isdigit(ch) || ((ch == '_' || ch == '.') && length > 0))
+        {
+            length++;
+        }
+        else if (isHex && ((ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F')))
         {
             length++;
         }
