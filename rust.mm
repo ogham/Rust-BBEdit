@@ -523,12 +523,20 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 ch = iter.GetNextChar();
                 if (ch == 'd')
                 {
-                    if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
-                    runStart = iter.Offset();
-                    runLen = skipWhitespace(iter);
-                    runLen += skipWord(iter);
-                    if (!addRun(moduleColour, runStart, runLen, *callbacks)) return noErr;
-                    runStart = iter.Offset();
+                    ch = iter.GetNextChar();
+                    if (isspace(ch))
+                    {
+                        if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                        runStart = iter.Offset();
+                        runLen = skipWhitespace(iter);
+                        runLen += skipWord(iter);
+                        if (!addRun(moduleColour, runStart, runLen, *callbacks)) return noErr;
+                        runStart = iter.Offset();
+                    }
+                    else if (ch)
+                    {
+                        iter--;
+                    }
                 }
                 else if (ch)
                 {
@@ -546,12 +554,20 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             ch = iter.GetNextChar();
             if (ch == 'n')
             {
-                if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
-                runStart = iter.Offset();
-                runLen = skipWhitespace(iter);
-                runLen += skipWord(iter);
-                if (!addRun(functionColour, runStart, runLen, *callbacks)) return noErr;
-                runStart = iter.Offset();
+                ch = iter.GetNextChar();
+                if (isspace(ch))
+                {
+                    if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                    runStart = iter.Offset();
+                    runLen = skipWhitespace(iter);
+                    runLen += skipWord(iter);
+                    if (!addRun(functionColour, runStart, runLen, *callbacks)) return noErr;
+                    runStart = iter.Offset();
+                }
+                else if (ch)
+                {
+                    iter--;
+                }
             }
             else if (ch)
             {
@@ -567,17 +583,25 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 ch = iter.GetNextChar();
                 if (ch == 'e')
                 {
-                    if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
-                    runStart = iter.Offset();
-                    runLen = skipWhitespace(iter);
-                    runLen += skipUse(iter);
-                    if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
-
-                    runStart = iter.Offset();
-                    runLen = skipWord(iter);
-                    if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
-
-                    runStart = iter.Offset();
+                    ch = iter.GetNextChar();
+                    if (isspace(ch))
+                    {
+                        if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                        runStart = iter.Offset();
+                        runLen = skipWhitespace(iter);
+                        runLen += skipUse(iter);
+                        if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
+                        
+                        runStart = iter.Offset();
+                        runLen = skipWord(iter);
+                        if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
+                        
+                        runStart = iter.Offset();
+                    }
+                    else if (ch)
+                    {
+                        iter--;
+                    }
                 }
                 else if (ch)
                 {
