@@ -73,6 +73,7 @@
 						<string>as</string>
 						<string>box</string>
 						<string>break</string>
+						<string>const</string>
 						<string>continue</string>
 						<string>crate</string>
 						<string>else</string>
@@ -112,37 +113,22 @@
 					<string>com.barebones.bblm.predefined-symbol</string>
 					<key>Keywords</key>
 					<array>
-						<string>assert</string>
 						<string>bool</string>
 						<string>char</string>
-						<string>debug</string>
-						<string>env</string>
-						<string>error</string>
-						<string>externfn</string>
 						<string>f32</string>
 						<string>f64</string>
-						<string>fail</string>
 						<string>float</string>
-						<string>fmt</string>
 						<string>i16</string>
 						<string>i32</string>
 						<string>i64</string>
 						<string>i8</string>
-						<string>include</string>
-						<string>include_bin</string>
-						<string>include_str</string>
-						<string>info</string>
 						<string>int</string>
-						<string>proto</string>
 						<string>str</string>
-						<string>stringify</string>
 						<string>u16</string>
 						<string>u32</string>
 						<string>u64</string>
 						<string>u8</string>
 						<string>uint</string>
-						<string>vec</string>
-						<string>warn</string>
 					</array>
 				</dict>
 			</array>
