@@ -161,7 +161,7 @@ SInt32 skipUse(BBLMTextIterator &iter)
     
     while ((ch = iter.GetNextChar()))
     {
-        if (islower(ch) || ch == ':' || ch == '_')
+        if (islower(ch) || ch == ':' || ch == '_' || (length > 0 && isdigit(ch)))
         {
             length++;
         }
