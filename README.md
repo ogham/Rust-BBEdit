@@ -6,7 +6,7 @@ BBEdit language module for Rust
 This is a BBEdit 11 Language Module for [Rust](http://www.rust-lang.org). It provides the following features:
 
 - Complete syntax highlighting
-    - Special support for lifetimes, attributes, and identifier
+    - Special support for lifetimes, attributes, and identifiers
     - Customisable colours using the [BBEdit 11 colour thing](http://barebones.com/products/bbedit/bbedit11.html)
 - Language features
     - Go to start of/end of/previous/next function
