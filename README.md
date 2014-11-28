@@ -1,6 +1,8 @@
 BBEdit language module for Rust
 ===============================
 
+!["A screenshot of the language module"](https://raw.githubusercontent.com/ogham/Rust.bblm/master/screenshot.png)
+
 This is a BBEdit 11 Language Module for [Rust](http://www.rust-lang.org). It provides the following features:
 
 - Complete syntax highlighting
