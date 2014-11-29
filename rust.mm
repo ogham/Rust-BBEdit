@@ -33,7 +33,7 @@ SInt32 skipString(BBLMTextIterator &iter)
     SInt32 length = 1;
     UniChar terminator = iter.GetNextChar();
     UniChar ch;
-    
+
     while ((ch = iter.GetNextChar()))
     {
         length++;
@@ -41,14 +41,14 @@ SInt32 skipString(BBLMTextIterator &iter)
         {
             break;
         }
-        
+
         if (ch == '\\')
         {
             iter++;
             length++;
         }
     }
-    
+
     return length;
 }
 
@@ -56,7 +56,7 @@ SInt32 skipLineComment(BBLMTextIterator &iter)
 {
     SInt32 length = 2;
     UniChar ch;
-    
+
     iter += 2;
     while ((ch = iter.GetNextChar()))
     {
@@ -70,7 +70,7 @@ SInt32 skipLineComment(BBLMTextIterator &iter)
             length++;
         }
     }
-    
+
     return length;
 }
 
@@ -84,10 +84,10 @@ SInt32 skipBlockComment(BBLMTextIterator &iter)
         iter++;
         length++;
     }
-    
+
     iter += 2;
     length += 2;
-    
+
     return length;
 }
 
@@ -95,7 +95,7 @@ SInt32 skipWhitespace(BBLMTextIterator &iter)
 {
     SInt32 length = 0;
     UniChar ch;
-    
+
     while ((ch = iter.GetNextChar()))
     {
         if (isspace(ch))
@@ -108,7 +108,7 @@ SInt32 skipWhitespace(BBLMTextIterator &iter)
             break;
         }
     }
-    
+
     return length;
 }
 
@@ -116,7 +116,7 @@ SInt32 skipWord(BBLMTextIterator &iter)
 {
     SInt32 length = 0;
     UniChar ch;
-    
+
     while ((ch = iter.GetNextChar()))
     {
         if (isalpha(ch) || ch == '_')
@@ -129,7 +129,7 @@ SInt32 skipWord(BBLMTextIterator &iter)
             break;
         }
     }
-    
+
     return length;
 }
 
@@ -137,7 +137,7 @@ SInt32 skipAttribute(BBLMTextIterator &iter)
 {
     SInt32 length = 1;
     UniChar ch;
-    
+
     iter++;
     while ((ch = iter.GetNextChar()))
     {
@@ -150,7 +150,7 @@ SInt32 skipAttribute(BBLMTextIterator &iter)
             length++;
         }
     }
-    
+
     return length;
 }
 
@@ -158,7 +158,7 @@ SInt32 skipUse(BBLMTextIterator &iter)
 {
     SInt32 length = 0;
     UniChar ch;
-    
+
     while ((ch = iter.GetNextChar()))
     {
         if (islower(ch) || ch == ':' || ch == '_' || (length > 0 && isdigit(ch)))
@@ -171,7 +171,7 @@ SInt32 skipUse(BBLMTextIterator &iter)
             break;
         }
     }
-    
+
     return length;
 }
 
@@ -181,7 +181,7 @@ SInt32 skipNumber(BBLMTextIterator &iter)
     UniChar ch = iter.GetNextChar();
     bool hasSuffix = false;
     int base = 10;
-    
+
     if (ch == '0')
     {
         ch = iter.GetNextChar();
@@ -210,7 +210,7 @@ SInt32 skipNumber(BBLMTextIterator &iter)
     {
         iter--;
     }
-    
+
     while ((ch = iter.GetNextChar()))
     {
         if ((base == 10) && (isdigit(ch) || ((ch == '_' || ch == '.') && length > 0)))
@@ -241,7 +241,7 @@ SInt32 skipNumber(BBLMTextIterator &iter)
             break;
         }
     }
-    
+
     if (hasSuffix)
     {
         if (iter.strcmp("8", 1) == 0)
@@ -255,7 +255,7 @@ SInt32 skipNumber(BBLMTextIterator &iter)
             length += 2;
         }
     }
-    
+
     return length;
 }
 
@@ -264,11 +264,11 @@ SInt32 skipToEndOfFunction(BBLMTextIterator &iter)
     SInt32 length = 0;
     UniChar ch;
     int braceLevel = 0, parenLevel = 0, bracketLevel = 0;
-    
+
     while ((ch = iter.GetNextChar()))
     {
         length++;
-        
+
         switch (ch) {
             case '/':
                 ch = iter.GetNextChar();
@@ -287,34 +287,34 @@ SInt32 skipToEndOfFunction(BBLMTextIterator &iter)
                     iter--;
                 }
                 break;
-                
+
             case '{':
                 braceLevel++;
                 break;
-                
+
             case '}':
                 braceLevel--;
                 if (braceLevel < 1) return length;
                 break;
-                
+
             case '(':
                 parenLevel++;
                 break;
-                
+
             case ')':
                 parenLevel--;
                 break;
-                
+
             case '[':
                 bracketLevel++;
                 break;
-                
+
             case ']':
                 bracketLevel--;
                 break;
         }
     }
-    
+
     return length;
 }
 
@@ -327,7 +327,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
 {
     SInt32 whitespaceLen, wordLen;
     int keywordLen = strlen(keyword);
-    
+
     if (iter.strcmp(keyword, keywordLen) == 0)
     {
         iter += keywordLen;
@@ -339,16 +339,16 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                 UInt32 tokenOffset, funIndex;
                 UInt32 nameLen;
                 BBLMProcInfo info;
-                
+
                 iter -= (wordLen + funLen);
                 nameLen = keywordLen + whitespaceLen + wordLen;
                 iter -= (keywordLen + whitespaceLen);
-                
+
                 bblmAddTokenToBuffer(callbacks, params.fFcnParams.fTokenBuffer, iter.Address(),
                                      nameLen, &tokenOffset);
 
                 iter += (nameLen - wordLen);
-                
+
                 iter -= (keywordLen + whitespaceLen);
                 info.fFirstChar   = info.fFunctionStart = iter.Offset();
                 info.fSelStart    = iter.Offset() + keywordLen + whitespaceLen;
@@ -360,7 +360,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                 info.fNameStart   = tokenOffset;
                 info.fNameLength  = nameLen;
                 bblmAddFunctionToList(callbacks, params.fFcnParams.fFcnList, info, &funIndex);
-                
+
                 iter += (keywordLen + whitespaceLen);
                 return info.fFunctionEnd;
             }
@@ -374,7 +374,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
             iter -= keywordLen;
         }
     }
-    
+
     return 0;
 }
 
@@ -384,24 +384,24 @@ static OSErr scanForFunctions(BBLMParamBlock &params, const BBLMCallbackBlock *c
     UniChar ch;
     std::stack<int> indents;
     SInt32 funEnd;
-    
+
     while ((ch = iter.GetNextChar()))
     {
         while (!indents.empty() && iter.Offset() >= indents.top())
         {
             indents.pop();
         }
-        
+
         const char* symbolToScanFor = NULL;
         int typeIfSo;
-        
+
         switch (ch)
         {
             case '"':
                 iter--;
                 skipString(iter);
                 break;
-                
+
             case '/':
                 ch = iter.GetNextChar();
                 if (ch == '/')
@@ -419,38 +419,38 @@ static OSErr scanForFunctions(BBLMParamBlock &params, const BBLMCallbackBlock *c
                     iter--;
                 }
                 break;
-                
+
             case 'e':
                 symbolToScanFor = "enum";
                 typeIfSo = kBBLMFunctionMark;
                 break;
-                
+
             case 'f':
                 symbolToScanFor = "fn";
                 typeIfSo = kBBLMFunctionMark;
                 break;
-                
+
             case 'i':
                 symbolToScanFor = "impl";
                 typeIfSo = kBBLMTypedef;
                 break;
-                
+
             case 'm':
                 symbolToScanFor = "mod";
                 typeIfSo = kBBLMFunctionMark;
                 break;
-                
+
             case 's':
                 symbolToScanFor = "struct";
                 typeIfSo = kBBLMFunctionMark;
                 break;
-                
+
             case 't':
                 symbolToScanFor = "trait";
                 typeIfSo = kBBLMFunctionMark;
                 break;
         }
-        
+
         if (symbolToScanFor != NULL)
         {
             iter--;
@@ -464,7 +464,7 @@ static OSErr scanForFunctions(BBLMParamBlock &params, const BBLMCallbackBlock *c
             }
         }
     }
-    
+
     return noErr;
 }
 
@@ -487,7 +487,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
     BBLMTextIterator iter(params, 0);
     SInt32 runStart = iter.Offset();
     SInt32 runLen;
-    
+
     UniChar ch;
     bool wordchr = false;
     while ((ch = iter.GetNextChar()))
@@ -501,7 +501,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!addRun(kBBLMDoubleQuotedStringRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
-        
+
         // Have to distinguish the following things:
         // 'a'  (character)
         // '\a' (escaped character)
@@ -556,7 +556,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 }
             }
         }
-       
+
         else if (!wordchr && ch == 'm')
         {
             ch = iter.GetNextChar();
@@ -590,7 +590,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 iter--;
             }
         }
-        
+
         else if (!wordchr && ch == 'f')
         {
             ch = iter.GetNextChar();
@@ -616,7 +616,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 iter--;
             }
         }
-        
+
         else if (!wordchr && ch == 'u')
         {
             ch = iter.GetNextChar();
@@ -633,11 +633,11 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                         runLen = skipWhitespace(iter);
                         runLen += skipUse(iter);
                         if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
-                        
+
                         runStart = iter.Offset();
                         runLen = skipWord(iter);
                         if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
-                        
+
                         runStart = iter.Offset();
                     }
                     else if (ch)
@@ -655,7 +655,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 iter--;
             }
         }
-        
+
         else if (ch == '/')
         {
             ch = iter.GetNextChar();
@@ -682,7 +682,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 iter--;
             }
         }
-            
+
         else if (ch == '#')
         {
             iter--;
@@ -692,7 +692,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!addRun(attributeColour, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
-        
+
         else if (!wordchr && isupper(ch))
         {
             iter--;
@@ -702,7 +702,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
-        
+
         else if (!wordchr && (ch == '+' || ch == '-'))
         {
             ch = iter.GetNextChar();
@@ -721,7 +721,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                 iter--;
             }
         }
-        
+
         else if (!wordchr && isdigit(ch))
         {
             iter--;
@@ -731,10 +731,10 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!addRun(kBBLMNumberRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
-        
+
         wordchr = isalpha(ch) || isdigit(ch);
     }
-    
+
     makeCodeRun(iter, runStart, *callbacks);
     return noErr;
 }
@@ -756,12 +756,12 @@ OSErr adjustRange(BBLMParamBlock &params, const BBLMCallbackBlock &callbacks)
     SInt32 charPos;
     SInt32 length;
     UInt32 index = params.fAdjustRangeParams.fStartIndex;
-    
+
     while (index > 0 && bblmGetRun(&callbacks, index, language, kind, charPos, length)/* && isSpecialKind(kind)*/)
     {
         index--;
     }
-    
+
     params.fAdjustRangeParams.fStartIndex = index;
     return noErr;
 }
@@ -769,12 +769,12 @@ OSErr adjustRange(BBLMParamBlock &params, const BBLMCallbackBlock &callbacks)
 OSErr guessLanguage(BBLMParamBlock &params)
 {
     BBLMTextIterator iter(params);
-    
+
     if (iter.strcmp("use ", 4) == 0 || iter.strcmp("#![crate_id", 11) == 0)
     {
         params.fGuessLanguageParams.fGuessResult = kBBLMGuessDefiniteYes;
     }
-    
+
     return noErr;
 }
 
@@ -787,29 +787,29 @@ extern "C"
     {
         // Dispatch message.
         OSErr result = noErr;
-        
+
         switch (params.fMessage)
         {
             case kBBLMDisposeMessage:
             case kBBLMSetCategoriesMessage:
                 // Message understood, but no action required.
                 break;
-                
+
             case kBBLMInitMessage:
                 break;
-                
+
             case kBBLMScanForFunctionsMessage:
                 result = scanForFunctions(params, &bblmCallbacks);
                 break;
-                
+
             case kBBLMCalculateRunsMessage:
                 result = calculateRuns(params, &bblmCallbacks);
                 break;
-                
+
             case kBBLMGuessLanguageMessage:
                 result = guessLanguage(params);
                 break;
-                
+
             case kBBLMAdjustRangeMessage:
                 result = adjustRange(params, bblmCallbacks);
                 break;
@@ -817,7 +817,7 @@ extern "C"
             default:
                 result = paramErr;
         }
-        
+
         return result;
     }
 }
