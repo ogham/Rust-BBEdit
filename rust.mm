@@ -276,6 +276,14 @@ SInt32 skipToEndOfFunction(BBLMTextIterator &iter)
                 if (braceLevel < 1) return length;
                 break;
 
+            case ';':
+                // If the definition just ends with a semicolon, then it's
+                // either a function in a trait definition, or a C function
+                // definition in an extern, neither of which we want in the
+                // function list.
+                if (braceLevel < 1) return 0;
+                break;
+
             case '(':
                 parenLevel++;
                 break;
@@ -315,6 +323,13 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
             if ((wordLen = skipWord(iter)))
             {
                 UInt32 funLen = skipToEndOfFunction(iter);
+                
+                // Skip over trait method definitions and extern functions
+                if (funLen == 0)
+                {
+                    return 0;
+                }
+
                 UInt32 tokenOffset, funIndex;
                 UInt32 nameLen;
                 BBLMProcInfo info;
