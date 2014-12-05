@@ -119,7 +119,7 @@ SInt32 skipWord(BBLMTextIterator &iter)
 
     while ((ch = iter.GetNextChar()))
     {
-        if (isalpha(ch) || ch == '_')
+        if (isalpha(ch) || ch == '_' || (length > 0 && isdigit(ch)))
         {
             length++;
         }
