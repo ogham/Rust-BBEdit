@@ -320,6 +320,8 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
         iter += keywordLen;
         if ((whitespaceLen = skipWhitespace(iter)))
         {
+            bool is_test = iter.strcmp("test", 4) == 0;
+            
             if ((wordLen = skipWord(iter)))
             {
                 UInt32 funLen = skipToEndOfFunction(iter);
@@ -329,14 +331,21 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                 {
                     return 0;
                 }
+                
+                // Ignore modules called 'test'
+                if (strcmp(keyword, "mod") == 0 && is_test)
+                {
+                    return 0;
+                }
 
                 UInt32 tokenOffset, funIndex;
                 UInt32 nameLen;
                 BBLMProcInfo info;
 
                 iter -= (wordLen + funLen);
-                nameLen = keywordLen + whitespaceLen + wordLen;
                 iter -= (keywordLen + whitespaceLen);
+
+                nameLen = keywordLen + whitespaceLen + wordLen;
 
                 bblmAddTokenToBuffer(callbacks, params.fFcnParams.fTokenBuffer, iter.Address(),
                                      nameLen, &tokenOffset);
