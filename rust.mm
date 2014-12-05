@@ -8,7 +8,7 @@
 #include "BBLMInterface.h"
 #include "BBLMTextIterator.h"
 
-#define kMaxLineLength	256
+#define kMaxLineLength  256
 
 static NSString* const identifierColour = @"me.bsago.bblm.rust.identifier";
 static NSString* const attributeColour = @"me.bsago.bblm.rust.attribute";
@@ -148,27 +148,6 @@ SInt32 skipAttribute(BBLMTextIterator &iter)
         else
         {
             length++;
-        }
-    }
-
-    return length;
-}
-
-SInt32 skipUse(BBLMTextIterator &iter)
-{
-    SInt32 length = 0;
-    UniChar ch;
-
-    while ((ch = iter.GetNextChar()))
-    {
-        if (islower(ch) || ch == ':' || ch == '_' || (length > 0 && isdigit(ch)))
-        {
-            length++;
-        }
-        else
-        {
-            iter--;
-            break;
         }
     }
 
@@ -360,7 +339,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                 info.fNameStart   = tokenOffset;
                 info.fNameLength  = nameLen;
                 bblmAddFunctionToList(callbacks, params.fFcnParams.fFcnList, info, &funIndex);
-
+                bblmAddFoldRange(callbacks, info.fFunctionStart, funLen, kBBLMFunctionAutoFold);
                 iter += (keywordLen + whitespaceLen);
                 return info.fFunctionEnd;
             }
@@ -628,17 +607,44 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                     ch = iter.GetNextChar();
                     if (isspace(ch))
                     {
+                        skipWhitespace(iter);
                         if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+
                         runStart = iter.Offset();
-                        runLen = skipWhitespace(iter);
-                        runLen += skipUse(iter);
+                        runLen = 0;
+                        bool spacey = false;
+
+                        while ((ch = iter.GetNextChar()))
+                        {
+                            if (spacey && isupper(ch))
+                            {
+                                iter--;
+                                if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
+
+                                runStart = iter.Offset();
+                                runLen = skipWord(iter);
+                                if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
+
+                                runStart = iter.Offset();
+                                runLen = 0;
+                            }
+                            else if (ch == ';' || ch == '\n')
+                            {
+                                iter--;
+                                if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
+                                break;
+                            }
+                            else
+                            {
+                                spacey = isspace(ch) || ch == ':' || ch == '{';
+                                runLen++;
+                            }
+                        }
+
                         if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
 
                         runStart = iter.Offset();
                         runLen = skipWord(iter);
-                        if (!addRun(identifierColour, runStart, runLen, *callbacks)) return noErr;
-
-                        runStart = iter.Offset();
                     }
                     else if (ch)
                     {
