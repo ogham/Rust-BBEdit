@@ -196,15 +196,15 @@ SInt32 skipNumber(BBLMTextIterator &iter)
         {
             length++;
         }
-        else if ((base == 2) && (ch == '0' || ch == '1'))
+        else if ((base == 2) && (ch == '0' || ch == '1' || ((ch == '_' || ch == '.') && length > 0)))
         {
             length++;
         }
-        else if ((base == 8) && (ch >= '0' && ch <= '7'))
+        else if ((base == 8) && ((ch >= '0' && ch <= '7') || ((ch == '_' || ch == '.') && length > 0)))
         {
             length++;
         }
-        else if ((base == 16) && ((ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F') || isdigit(ch)))
+        else if ((base == 16) && ((ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F') || isdigit(ch) || ((ch == '_' || ch == '.') && length > 0)))
         {
             length++;
         }
@@ -762,7 +762,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             runStart = iter.Offset();
         }
 
-        wordchr = isalpha(ch) || isdigit(ch);
+        wordchr = isalpha(ch) || isdigit(ch) || ch == '_';
     }
 
     makeCodeRun(iter, runStart, *callbacks);
