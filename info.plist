@@ -122,13 +122,13 @@
 						<string>i32</string>
 						<string>i64</string>
 						<string>i8</string>
-						<string>int</string>
+						<string>isize</string>
 						<string>str</string>
 						<string>u16</string>
 						<string>u32</string>
 						<string>u64</string>
 						<string>u8</string>
-						<string>uint</string>
+						<string>usize</string>
 					</array>
 				</dict>
 			</array>
