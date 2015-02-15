@@ -105,6 +105,7 @@
 						<string>type</string>
 						<string>unsafe</string>
 						<string>use</string>
+						<string>where</string>
 						<string>while</string>
 					</array>
 				</dict>
