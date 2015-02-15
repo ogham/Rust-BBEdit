@@ -30,13 +30,21 @@ static bool addRun(NSString *kind, int  start,int len , const BBLMCallbackBlock&
 SInt32 skipString(BBLMTextIterator &iter)
 {
     SInt32 length = 1;
-    UniChar terminator = iter.GetNextChar();
     UniChar ch;
+    
+    if (iter.strcmp("\"", 1) == 0)
+    {
+        iter += 1;
+    }
+    else
+    {
+        return 0;
+    }
 
     while ((ch = iter.GetNextChar()))
     {
         length++;
-        if (ch == terminator)
+        if (ch == '"')
         {
             break;
         }
