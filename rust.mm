@@ -11,7 +11,6 @@
 #define kMaxLineLength  256
 
 static NSString* const identifierColour = @"me.bsago.bblm.rust.identifier";
-static NSString* const attributeColour = @"me.bsago.bblm.rust.attribute";
 static NSString* const lifetimeColour = @"me.bsago.bblm.rust.lifetime";
 static NSString* const functionColour = @"me.bsago.bblm.rust.function";
 static NSString* const moduleColour = @"me.bsago.bblm.rust.module";
@@ -826,7 +825,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
             runStart = iter.Offset();
             runLen = skipAttribute(iter);
-            if (!addRun(attributeColour, runStart, runLen, *callbacks)) return noErr;
+            if (!addRun(kBBLMPreprocessorRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
         

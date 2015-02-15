@@ -43,8 +43,6 @@
 				<string>&apos;lifetime</string>
 				<key>me.bsago.bblm.rust.identifier</key>
 				<string>Identifier</string>
-				<key>me.bsago.bblm.rust.attribute</key>
-				<string>#[attribute]</string>
 				<key>me.bsago.bblm.rust.function</key>
 				<string>fn functionname</string>
 				<key>me.bsago.bblm.rust.module</key>
@@ -56,8 +54,6 @@
 				<string>rgb(135, 2, 219)</string>
 				<key>me.bsago.bblm.rust.lifetime</key>
 				<string>rgb(133, 20, 75)</string>
-				<key>me.bsago.bblm.rust.attribute</key>
-				<string>rgb(177, 13, 201)</string>
 				<key>me.bsago.bblm.rust.identifier</key>
 				<string>rgb(61, 153, 112)</string>
 				<key>me.bsago.bblm.rust.function</key>
