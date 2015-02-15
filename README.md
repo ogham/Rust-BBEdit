@@ -17,7 +17,7 @@ By default, it highlights anything beginning with a capital letter in a certain 
 
 ### Installation
 
-The simplest way is to just [download the package](https://github.com/ogham/Rust.bblm/releases/tag/0.2) and put it in this folder:
+The simplest way is to just [download the package](https://github.com/ogham/Rust.bblm/releases/tag/0.3) and put it in this folder:
 
     ~/Application Support/BBEdit/Language Modules
 
