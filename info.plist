@@ -70,16 +70,21 @@
 					<string>com.barebones.bblm.keyword</string>
 					<key>Keywords</key>
 					<array>
+						<string>abstract</string>
+						<string>alignof</string>
 						<string>as</string>
+						<string>become</string>
 						<string>box</string>
 						<string>break</string>
 						<string>const</string>
 						<string>continue</string>
 						<string>crate</string>
+						<string>do</string>
 						<string>else</string>
 						<string>enum</string>
 						<string>extern</string>
 						<string>false</string>
+						<string>final</string>
 						<string>fn</string>
 						<string>for</string>
 						<string>if</string>
@@ -87,26 +92,36 @@
 						<string>in</string>
 						<string>let</string>
 						<string>loop</string>
+						<string>macro</string>
 						<string>macro_rules</string>
 						<string>match</string>
 						<string>mod</string>
+						<string>move</string>
 						<string>mut</string>
+						<string>offsetof</string>
+						<string>override</string>
 						<string>priv</string>
 						<string>proc</string>
 						<string>pub</string>
+						<string>pure</string>
 						<string>ref</string>
 						<string>return</string>
 						<string>self</string>
+						<string>sizeof</string>
 						<string>static</string>
 						<string>struct</string>
 						<string>super</string>
 						<string>trait</string>
 						<string>true</string>
 						<string>type</string>
+						<string>typeof</string>
 						<string>unsafe</string>
+						<string>unsized</string>
 						<string>use</string>
+						<string>virtual</string>
 						<string>where</string>
 						<string>while</string>
+						<string>yield</string>
 					</array>
 				</dict>
 				<dict>
