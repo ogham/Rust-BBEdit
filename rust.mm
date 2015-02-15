@@ -588,6 +588,104 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                     iter--;
                 }
             }
+            else if (ch == 'a')
+            {
+                // I am ashamed of how nested this code is.
+                ch = iter.GetNextChar();
+                if (ch == 'c')
+                {
+                    ch = iter.GetNextChar();
+                    if (ch == 'r')
+                    {
+                        ch = iter.GetNextChar();
+                        if (ch == 'o')
+                        {
+                            ch = iter.GetNextChar();
+                            if (ch == '_')
+                            {
+                                ch = iter.GetNextChar();
+                                if (ch == 'r')
+                                {
+                                    ch = iter.GetNextChar();
+                                    if (ch == 'u')
+                                    {
+                                        ch = iter.GetNextChar();
+                                        if (ch == 'l')
+                                        {
+                                            ch = iter.GetNextChar();
+                                            if (ch == 'e')
+                                            {
+                                                ch = iter.GetNextChar();
+                                                if (ch == 's')
+                                                {
+                                                    ch = iter.GetNextChar();
+                                                    if (ch == '!')
+                                                    {
+                                                        ch = iter.GetNextChar();
+                                                        if (isspace(ch))
+                                                        {
+                                                            if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+                                                            runStart = iter.Offset();
+                                                            runLen = skipWhitespace(iter);
+                                                            runLen += skipWord(iter);
+                                                            if (!addRun(functionColour, runStart, runLen, *callbacks)) return noErr;
+                                                            runStart = iter.Offset();
+                                                        }
+                                                        else if (ch)
+                                                        {
+                                                            iter--;
+                                                        }
+                                                    }
+                                                    else if (ch)
+                                                    {
+                                                        iter--;
+                                                    }
+                                                }
+                                                else if (ch)
+                                                {
+                                                    iter--;
+                                                }
+                                            }
+                                            else if (ch)
+                                            {
+                                                iter--;
+                                            }
+                                        }
+                                        else if (ch)
+                                        {
+                                            iter--;
+                                        }
+                                    }
+                                    else if (ch)
+                                    {
+                                        iter--;
+                                    }
+                                }
+                                else if (ch)
+                                {
+                                    iter--;
+                                }
+                            }
+                            else if (ch)
+                            {
+                                iter--;
+                            }
+                        }
+                        else if (ch)
+                        {
+                            iter--;
+                        }
+                    }
+                    else if (ch)
+                    {
+                        iter--;
+                    }
+                }
+                else if (ch)
+                {
+                    iter--;
+                }
+            }
             else if (ch)
             {
                 iter--;
@@ -720,6 +818,17 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             runStart = iter.Offset();
             runLen = skipAttribute(iter);
             if (!addRun(attributeColour, runStart, runLen, *callbacks)) return noErr;
+            runStart = iter.Offset();
+        }
+        
+        else if (ch == '$')
+        {
+            iter--;
+            if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+            runStart = iter.Offset();
+            iter++;
+            runLen = skipWord(iter) + 1;
+            if (runLen > 1 && !addRun(kBBLMVariableRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
 
