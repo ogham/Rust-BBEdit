@@ -51,6 +51,40 @@ SInt32 skipString(BBLMTextIterator &iter)
     return length;
 }
 
+SInt32 skipRawString(BBLMTextIterator &iter)
+{
+    SInt32 length = 4;
+    UniChar ch;
+    
+    if (iter.strcmp("r##\"", 4) == 0)
+    {
+        iter += 4;
+    }
+    else
+    {
+        return 0;
+    }
+    
+    while ((ch = iter.GetNextChar()))
+    {
+        length++;
+        if (iter.strcmp("\"##", 3) == 0)
+        {
+            length += 3;
+            iter += 3;
+            break;
+        }
+        
+        if (ch == '\\')
+        {
+            iter++;
+            length++;
+        }
+    }
+    
+    return length;
+}
+
 SInt32 skipLineComment(BBLMTextIterator &iter)
 {
     SInt32 length = 2;
@@ -527,7 +561,20 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
     bool wordchr = false;
     while ((ch = iter.GetNextChar()))
     {
-        if (ch == '"')
+        if (ch == 'r' && iter.strcmp("##\"", 3) == 0)
+        {
+            iter--;
+            if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
+            runStart = iter.Offset();
+            runLen = skipRawString(iter);
+            
+            // Use the heredoc colour to highlight raw strings.
+            // It's not exactly a heredoc, but it's the closest!
+            if (!addRun(kBBLMHereDocStringRunKind, runStart, runLen, *callbacks)) return noErr;
+            runStart = iter.Offset();
+        }
+        
+        else if (ch == '"')
         {
             iter--;
             if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
