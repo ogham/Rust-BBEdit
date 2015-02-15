@@ -210,8 +210,17 @@ SInt32 skipNumber(BBLMTextIterator &iter)
         }
         else if (ch == 'f' || ch == 'u' || ch == 'i')
         {
-            hasSuffix = true;
             length++;
+            if (ch != 'f' && iter.strcmp("s", 1) == 0)
+            {
+                // Parse 'us' or 'is' machine-dependent suffixes
+                length++;
+            }
+            else
+            {
+                // Otherwise, allow for numbers at the end
+                hasSuffix = true;
+            }
             break;
         }
         else
