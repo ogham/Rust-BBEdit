@@ -134,13 +134,37 @@ SInt32 skipWord(BBLMTextIterator &iter)
 
 SInt32 skipAttribute(BBLMTextIterator &iter)
 {
-    SInt32 length = 1;
+    SInt32 length = 0;
     UniChar ch;
 
-    iter++;
+    if (iter.strcmp("#[", 2) == 0)
+    {
+        length += 2;
+        iter += 2;
+    }
+    else if (iter.strcmp("#![", 3) == 0)
+    {
+        length += 3;
+        iter += 3;
+    }
+    else if (iter.strcmp("#", 1) == 0)
+    {
+        iter++;
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+    
     while ((ch = iter.GetNextChar()))
     {
-        if (ch == '\n' || ch == '\r')
+        if (ch == ']')
+        {
+            length++;
+            break;
+        }
+        else if (ch == '\n' || ch == '\r')
         {
             break;
         }

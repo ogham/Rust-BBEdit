@@ -50,6 +50,8 @@
   r##"there's a " in this string"##  // the string shouldn't end until ##
   r##"there's a # in this string"##  // even if there's a # in the middle
 
+  // " // in case the above failed :)
+
 // Decimal Numbers
 // ---------------
 
@@ -84,7 +86,7 @@
   7.348e+22         // uppercase E and plus
 
   let tuple = ((8, 4), 48);
-  let a = tuple.1.1
+  let a = tuple.0.0;
 
 // Numeric Suffixes
 // ----------------
@@ -99,3 +101,12 @@
   0.1f32
   12E+99_f64
   2.f64  // Invalid!
+
+// Attributes
+// ----------
+
+  #[attribute]
+  #![top_level_attribute]
+  #not_an_attribute
+
+  #[macro_use] use this_is_not_an_attribute;
