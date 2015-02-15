@@ -106,7 +106,15 @@
 // ----------
 
   #[attribute]
+  #[derive(This, That, Other)]
   #![top_level_attribute]
   #not_an_attribute
 
   #[macro_use] use this_is_not_an_attribute;
+
+// Macros
+// ------
+
+  macro_rules! parse {
+      ($thing: expr) => { $thing };
+  }
