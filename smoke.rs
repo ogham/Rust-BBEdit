@@ -118,3 +118,14 @@
   macro_rules! parse {
       ($thing: expr) => { $thing };
   }
+
+// `use` statements
+// ----------------
+
+use flux;
+use flux::capacitor;
+use flux::capacitor::Component::*;
+use flux::capacitor::Component::{ImpurePalladium, ThinkingAluminium, TimeyWimeyDevice};
+use flux::capacitor as cap;
+use super;
+use self;

@@ -763,10 +763,30 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                                 if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
                                 break;
                             }
-                            else
+                            else if (ch)
                             {
                                 spacey = isspace(ch) || ch == ':' || ch == '{';
                                 runLen++;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            
+                            if (iter.strcmp(" as ", 4) == 0)
+                            {
+                                if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
+                                runStart = iter.Offset();
+                                iter += 4;
+                                if (!addRun(kBBLMCodeRunKind, runStart, 4, *callbacks)) return noErr;
+                                
+                                runStart = iter.Offset();
+                                runLen = skipWord(iter);
+                                if (!addRun(moduleColour, runStart, runLen, *callbacks)) return noErr;
+                                
+                                iter++;
+                                runLen = 0;
+                                break;
                             }
                         }
 
