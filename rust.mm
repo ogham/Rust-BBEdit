@@ -569,7 +569,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
     bool wordchr = false;
     while ((ch = iter.GetNextChar()))
     {
-        if (ch == 'r' && iter.strcmp("##\"", 3) == 0)
+        if (ch == 'r' && iter.CharsLeft() >= 3 && iter.strcmp("##\"", 3) == 0)
         {
             iter--;
             if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
@@ -675,7 +675,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                     iter--;
                 }
             }
-            else if (ch == 'a' && iter.strcmp("cro_rules!", 10) == 0)
+            else if (ch == 'a' && iter.CharsLeft() >= 10 && iter.strcmp("cro_rules!", 10) == 0)
             {
                 iter += 10;
                 ch = iter.GetNextChar();
