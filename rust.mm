@@ -386,37 +386,60 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                      BBLMParamBlock &params,
                      const BBLMCallbackBlock *callbacks)
 {
-    SInt32 whitespaceLen, wordLen = 0;
+    SInt32 whitespaceLen, wordLen = 0, parametersLen = 0;
     UniChar ch;
     int keywordLen = strlen(keyword);
 
     if (iter.strcmp(keyword, keywordLen) == 0)
     {
         iter += keywordLen;
-        whitespaceLen = skipWhitespace(iter);
 
-        if (whitespaceLen == 0)
+        // Check for end of word, so 'enum' doesn't also match 'enumerate'.
+        // But also check for '<', so 'impl<'a>' is a legit statement, even with no whitespace.
+        whitespaceLen = skipWhitespace(iter);
+        if (whitespaceLen == 0 && iter.strcmp("<", 1) != 0)
         {
             iter -= keywordLen + whitespaceLen;
             return 0;
         }
         
-        bool is_test = iter.strcmp("test", 4) == 0;
-        
+        SInt32 start_of_name = iter.Offset();
+        SInt32 start_of_function;
         while ((ch = iter.GetNextChar()))
         {
-            if (ch == '{' || ch == '(' || ch == ';')
+            if (ch == '{' || ch == ';')
             {
                 iter--;
+                start_of_function = iter.Offset();
+                break;
+            }
+            else if (ch == '(')
+            {
+                while ((ch = iter.GetNextChar()))
+                {
+                    whitespaceLen++;
+                    if (ch == '{' || ch == ';')
+                    {
+                        break;
+                    }
+                }
+                
+                iter--;
+                start_of_function = iter.Offset();
                 break;
             }
             else if (ch == '\n')
             {
+                start_of_function = iter.Offset();
                 break;
+            }
+            else if (ch)
+            {
+                whitespaceLen++;
             }
             else
             {
-                whitespaceLen++;
+                return 0;
             }
         }
         
@@ -424,12 +447,6 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
         
         // Skip over trait method definitions and extern functions
         if (funLen == 0)
-        {
-            return 0;
-        }
-        
-        // Ignore modules called 'test'
-        if (strcmp(keyword, "mod") == 0 && is_test)
         {
             return 0;
         }
@@ -449,17 +466,23 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
         iter -= (keywordLen + whitespaceLen);
 
         BBLMProcInfo info;
-        info.fFirstChar   = info.fFunctionStart = iter.Offset();
-        info.fSelStart    = iter.Offset() + keywordLen + whitespaceLen;
-        info.fSelEnd      = info.fSelStart + wordLen;
-        info.fFunctionEnd = info.fSelEnd + funLen;
-        info.fIndentLevel = indentLevel;
-        info.fKind        = typeIfSo;
-        info.fFlags       = 0;
-        info.fNameStart   = tokenOffset;
-        info.fNameLength  = nameLen;
+        info.fFirstChar      = info.fFunctionStart = iter.Offset();
+        info.fSelStart       = iter.Offset() + keywordLen + whitespaceLen;
+        info.fSelEnd         = info.fSelStart + wordLen;
+        info.fFunctionStart  = start_of_function;
+        info.fFunctionEnd    = info.fSelEnd + funLen;
+        info.fIndentLevel    = indentLevel;
+        info.fKind           = typeIfSo;
+        info.fFlags          = 0;
+        info.fNameStart      = tokenOffset;
+        info.fNameLength     = nameLen;
+
         bblmAddFunctionToList(callbacks, params.fFcnParams.fFcnList, info, &funIndex);
-        bblmAddFoldRange(callbacks, info.fFunctionStart, funLen, kBBLMFunctionAutoFold);
+
+        // But still allow the user to fold them
+        // (the length changes here are to cut off the opening { and closing } from the fold range
+        bblmAddFoldRange(callbacks, start_of_function + 1, funLen - 2, kBBLMFunctionAutoFold);
+        
         iter += (keywordLen + whitespaceLen);
         return info.fFunctionEnd;
     }
