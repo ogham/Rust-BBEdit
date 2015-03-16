@@ -386,70 +386,75 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                      BBLMParamBlock &params,
                      const BBLMCallbackBlock *callbacks)
 {
-    SInt32 whitespaceLen, wordLen;
+    SInt32 whitespaceLen, wordLen = 0;
+    UniChar ch;
     int keywordLen = strlen(keyword);
 
     if (iter.strcmp(keyword, keywordLen) == 0)
     {
         iter += keywordLen;
-        if ((whitespaceLen = skipWhitespace(iter)))
+        whitespaceLen = skipWhitespace(iter);
+        bool is_test = iter.strcmp("test", 4) == 0;
+        
+        while ((ch = iter.GetNextChar()))
         {
-            bool is_test = iter.strcmp("test", 4) == 0;
-            
-            if ((wordLen = skipWord(iter)))
+            if (ch == '{' || ch == '(' || ch == ';')
             {
-                UInt32 funLen = skipToEndOfFunction(iter);
-                
-                // Skip over trait method definitions and extern functions
-                if (funLen == 0)
-                {
-                    return 0;
-                }
-                
-                // Ignore modules called 'test'
-                if (strcmp(keyword, "mod") == 0 && is_test)
-                {
-                    return 0;
-                }
-
-                UInt32 tokenOffset, funIndex;
-                UInt32 nameLen;
-                BBLMProcInfo info;
-
-                iter -= (wordLen + funLen);
-                iter -= (keywordLen + whitespaceLen);
-
-                nameLen = keywordLen + whitespaceLen + wordLen;
-
-                bblmAddTokenToBuffer(callbacks, params.fFcnParams.fTokenBuffer, iter.Address(),
-                                     nameLen, &tokenOffset);
-
-                iter += (nameLen - wordLen);
-
-                iter -= (keywordLen + whitespaceLen);
-                info.fFirstChar   = info.fFunctionStart = iter.Offset();
-                info.fSelStart    = iter.Offset() + keywordLen + whitespaceLen;
-                info.fSelEnd      = info.fSelStart + wordLen;
-                info.fFunctionEnd = info.fSelEnd + funLen;
-                info.fIndentLevel = indentLevel;
-                info.fKind        = typeIfSo;
-                info.fFlags       = 0;
-                info.fNameStart   = tokenOffset;
-                info.fNameLength  = nameLen;
-                bblmAddFunctionToList(callbacks, params.fFcnParams.fFcnList, info, &funIndex);
-                bblmAddFoldRange(callbacks, info.fFunctionStart, funLen, kBBLMFunctionAutoFold);
-                iter += (keywordLen + whitespaceLen);
-                return info.fFunctionEnd;
+                iter--;
+                break;
+            }
+            else if (ch == '\n')
+            {
+                break;
             }
             else
             {
-                iter -= (whitespaceLen + keywordLen);
+                whitespaceLen++;
             }
         }
-        else
+        
+        UInt32 funLen = skipToEndOfFunction(iter);
+        
+        // Skip over trait method definitions and extern functions
+        if (funLen == 0)
         {
-            iter -= keywordLen;
+            return 0;
         }
+        
+        // Ignore modules called 'test'
+        if (strcmp(keyword, "mod") == 0 && is_test)
+        {
+            return 0;
+        }
+
+        UInt32 tokenOffset, funIndex;
+        UInt32 nameLen;
+        
+        iter -= (wordLen + funLen);
+        iter -= (keywordLen + whitespaceLen);
+
+        nameLen = keywordLen + whitespaceLen + wordLen;
+
+        bblmAddTokenToBuffer(callbacks, params.fFcnParams.fTokenBuffer, iter.Address(),
+                             nameLen, &tokenOffset);
+
+        iter += (nameLen - wordLen);
+        iter -= (keywordLen + whitespaceLen);
+
+        BBLMProcInfo info;
+        info.fFirstChar   = info.fFunctionStart = iter.Offset();
+        info.fSelStart    = iter.Offset() + keywordLen + whitespaceLen;
+        info.fSelEnd      = info.fSelStart + wordLen;
+        info.fFunctionEnd = info.fSelEnd + funLen;
+        info.fIndentLevel = indentLevel;
+        info.fKind        = typeIfSo;
+        info.fFlags       = 0;
+        info.fNameStart   = tokenOffset;
+        info.fNameLength  = nameLen;
+        bblmAddFunctionToList(callbacks, params.fFcnParams.fFcnList, info, &funIndex);
+        bblmAddFoldRange(callbacks, info.fFunctionStart, funLen, kBBLMFunctionAutoFold);
+        iter += (keywordLen + whitespaceLen);
+        return info.fFunctionEnd;
     }
 
     return 0;
