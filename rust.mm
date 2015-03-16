@@ -394,6 +394,13 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
     {
         iter += keywordLen;
         whitespaceLen = skipWhitespace(iter);
+
+        if (whitespaceLen == 0)
+        {
+            iter -= keywordLen + whitespaceLen;
+            return 0;
+        }
+        
         bool is_test = iter.strcmp("test", 4) == 0;
         
         while ((ch = iter.GetNextChar()))
