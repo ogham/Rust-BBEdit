@@ -7,11 +7,12 @@ This is a BBEdit 11 Language Module for [Rust](http://www.rust-lang.org). It pro
 
 - Complete syntax highlighting
     - Special support for lifetimes, attributes, and identifiers
-    - Customisable colours using the [BBEdit 11 colour thing](http://barebones.com/products/bbedit/bbedit11.html)
+    - Customisable colours using the [BBEdit 11 colour editor](http://barebones.com/products/bbedit/bbedit11.html)
 - Language features
     - Go to start of/end of/previous/next function
     - Go to named symbol
     - Indexed function menu
+    - Code folding
 
 By default, it highlights anything beginning with a capital letter in a certain colour. To turn this off, just change the Identifier colour to be the same as the default text colour in Preferences.
 
