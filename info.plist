@@ -125,22 +125,49 @@
 					<string>com.barebones.bblm.predefined-symbol</string>
 					<key>Keywords</key>
 					<array>
-						<string>bool</string>
-						<string>char</string>
-						<string>f32</string>
-						<string>f64</string>
-						<string>float</string>
-						<string>i16</string>
-						<string>i32</string>
-						<string>i64</string>
-						<string>i8</string>
-						<string>isize</string>
-						<string>str</string>
-						<string>u16</string>
-						<string>u32</string>
-						<string>u64</string>
-						<string>u8</string>
-						<string>usize</string>
+                        <string>blkcnt_t</string>
+                        <string>blksize_t</string>
+                        <string>bool</string>
+                        <string>c_char</string>
+                        <string>c_double</string>
+                        <string>c_float</string>
+                        <string>c_int</string>
+                        <string>c_long</string>
+                        <string>c_schar</string>
+                        <string>c_short</string>
+                        <string>c_uchar</string>
+                        <string>c_uint</string>
+                        <string>c_ulong</string>
+                        <string>c_ushort</string>
+                        <string>char</string>
+                        <string>clock_t</string>
+                        <string>dev_t</string>
+                        <string>f32</string>
+                        <string>f64</string>
+                        <string>float</string>
+                        <string>gid_t</string>
+                        <string>i16</string>
+                        <string>i32</string>
+                        <string>i64</string>
+                        <string>i8</string>
+                        <string>ino_t</string>
+                        <string>isize</string>
+                        <string>mode_t</string>
+                        <string>nlink_t</string>
+                        <string>off_t</string>
+                        <string>pid_t</string>
+                        <string>ptrdiff_t</string>
+                        <string>size_t</string>
+                        <string>str</string>
+                        <string>suseconds_t</string>
+                        <string>time_t</string>
+                        <string>u16</string>
+                        <string>u32</string>
+                        <string>u64</string>
+                        <string>u8</string>
+                        <string>uid_t</string>
+                        <string>usize</string>
+                        <string>wchar_t</string>
 					</array>
 				</dict>
 			</array>
