@@ -1,9 +1,9 @@
-BBEdit language module for Rust
-===============================
+BBEdit Package for Rust
+=======================
 
 !["A screenshot of the language module"](https://raw.githubusercontent.com/ogham/Rust.bblm/master/screenshot.png)
 
-This is a BBEdit 11 Language Module for [Rust](http://www.rust-lang.org). It provides the following features:
+This is a BBEdit 11 Package for [Rust](http://www.rust-lang.org). It provides the following features:
 
 - Complete syntax highlighting
     - Special support for lifetimes, attributes, and identifiers
@@ -18,12 +18,14 @@ By default, it highlights anything beginning with a capital letter in a certain 
 
 ### Installation
 
-The simplest way is to just [download the package](https://github.com/ogham/Rust.bblm/releases/tag/0.4.0) and put it in this folder:
+To install this package, simply clone the repo into BBEdit's Packages folder:
 
-    ~/Application Support/BBEdit/Language Modules
+```bash
+$ git clone https://github.com/ogham/Rust-BBEdit.git ~/Library/Application\ Support/BBEdit/Packages/Rust.bbpackage
+```
 
-Then restart your BBEdit and it should be picked up.
+Then restart your BBEdit and it should be picked up. It's necessary for the filename to end in `.bbpackage`.
 
 ### Compilation
 
-To compile your own version, you'll need Xcode. The default schema outputs a `.bblm`. You'll also need the BBEdit SDK. The project assumes it's mounted under `/Volumes/BBEdit SDK`.
+To compile your own version, you'll need Xcode. The default schema outputs a `.bblm`. You'll also need the BBEdit SDK. The project assumes it's mounted under `/Volumes/BBEdit SDK`. There's a `Makefile` that runs the build commands.
