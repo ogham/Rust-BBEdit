@@ -5,6 +5,9 @@ xcuserdata
 *.mode1v3
 xcshareddata
 
+# cargo noise
+target
+
 # osx noise
 .DS_Store
 profile
