@@ -3,6 +3,7 @@ build/*
 *.pbxuser
 xcuserdata
 *.mode1v3
+xcshareddata
 
 # osx noise
 .DS_Store
