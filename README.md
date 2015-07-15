@@ -13,6 +13,7 @@ This is a BBEdit 11 Package for [Rust](http://www.rust-lang.org). It provides th
     - Go to named symbol
     - Indexed function menu
     - Code folding
+- Clippings
 
 By default, it highlights anything beginning with a capital letter in a certain colour. To turn this off, just change the Identifier colour to be the same as the default text colour in Preferences.
 

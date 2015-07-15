@@ -1,0 +1,3 @@
+#indent#if let Some(#placeholderstart#variable#placeholderend#) = #placeholderstart#...#placeholderend# {
+    #placeholderstart#...#placeholderend#
+}

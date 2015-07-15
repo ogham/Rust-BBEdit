@@ -1,0 +1,4 @@
+\#[test]
+#indent#fn #placeholderstart#test#placeholderend#() {
+    #placeholderstart#...#placeholderend#
+}

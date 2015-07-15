@@ -1,0 +1,4 @@
+#indent#match #placeholderstart#...#placeholderend# {
+    Ok(#placeholderstart#...#placeholderend#) => #placeholderstart#...#placeholderend#,
+    Err(#placeholderstart#...#placeholderend#) => #placeholderstart#...#placeholderend#,
+}

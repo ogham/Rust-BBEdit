@@ -1,0 +1,4 @@
+#indent#match #placeholderstart#...#placeholderend# {
+    Some(#placeholderstart#...#placeholderend#) => #placeholderstart#...#placeholderend#,
+    None => #placeholderstart#...#placeholderend#,
+}

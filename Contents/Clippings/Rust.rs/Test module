@@ -1,0 +1,9 @@
+#indent#\#[cfg(test)]
+mod test {
+    use super::*;
+
+    \#[test]
+    fn #placeholderstart#test#placeholderend#() {
+        #placeholderstart#...#placeholderend#
+    }
+}
