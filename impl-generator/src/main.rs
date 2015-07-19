@@ -7,20 +7,24 @@ use std::process;
 use std::string::ToString;
 
 
+/// The string pattern that every incoming string should match against.
 pub static REGEX: &'static str = r##"(?x)
-    ^ impl
-    (?: < .+ >)? \s+
+                             # example:
 
-    ([A-Za-z0-9_:]+)
-    (< .+ >)? \s+
+    ^ impl                   # impl
+    (?: < .+ >)? \s+         # <'a>
 
-    for \s+
+    ([ A-Z a-z 0-9 _ : ]+)   # ops::Add
+    (< .+ >)? \s+            # <MyValue<'a>>
 
-    ([A-Za-z0-9_:]+)
-    (< .+ >)? \s*
+    for \s+                  # for
+
+    ([ A-Z a-z 0-9 _ : ]+)   # MyOtherValue
+    (< .+ >)? \s*            # <'a>
 
     \{? $
 "##;
+
 
 fn main() {
     let regex = Regex::new(REGEX).unwrap();
@@ -35,8 +39,11 @@ fn main() {
     let type_args  = caps.at(4).unwrap_or("");
 
     if let Some(components) = get_components(trait_name) {
+
+        // Print the first line...
         println!("impl{} {}{} for {}{} {{", type_args, trait_name,trait_args, type_name,type_args);
 
+        // Then print all the components, with a blank line between each one:
         let mut printed_anything = false;
         for component in components.iter() {
             if printed_anything == false {
@@ -48,10 +55,20 @@ fn main() {
 
             let text = component.to_string();
 
+            // There are three patterns that get replaced before a template is
+            // printed out:
+            //
+            // - SELF, which gets replaced with the name of the type the trait
+            //   is being implemented for;
+            // - PARAM, which gets replaced with the *parameter* of the trait;
+            // - RHS, which gets replaced with the parameter if one exists,
+            //   and the name of the type (like SELF) otherwise.
+
             if text.contains("PARAM") && trait_args.is_empty() {
                 fail(&*format!("Trait {} needs a generic argument", trait_name));
             }
 
+            // Remove the < and > from the trait's parameter if one exists.
             let rhs = if trait_args.is_empty() { type_name } else { &trait_args[1 .. trait_args.len() - 1] };
 
             let text = text.replace("SELF",  &*format!("{}{}", type_name, type_args))
@@ -61,6 +78,7 @@ fn main() {
             println!("{}", text);
         }
 
+        // And finally the last line.
         println!("}}");
     }
     else {
@@ -68,10 +86,15 @@ fn main() {
     }
 }
 
+
+/// A **component** forms part of the resulting template.
 #[derive(Copy, Clone)]
 enum Component<'a> {
+
+    /// An associated type that has to be specified for this implementation.
     AssocType(&'a str),
 
+    /// A function definition that must be specified for this trait.
     Function {
         name: &'a str,
         input: &'a str,
@@ -105,6 +128,9 @@ impl<'a> fmt::Display for Component<'a> {
 	}
 }
 
+
+/// Return a vector of components for a trait if the trait exists; returns
+/// `None` otherwise.
 fn get_components(trait_name: &str) -> Option<Vec<Component<'static>>> {
     use self::Component::*;
 
@@ -368,6 +394,9 @@ fn get_components(trait_name: &str) -> Option<Vec<Component<'static>>> {
     Some(bits)
 }
 
+
+/// Return the components for a mathematical operator, all of which follow the
+/// same pattern.
 fn maths(name: &'static str) -> Vec<Component<'static>> {
     vec![
         Component::AssocType("Output"),
@@ -380,6 +409,9 @@ fn maths(name: &'static str) -> Vec<Component<'static>> {
     ]
 }
 
+
+/// Return the components for a formatting trait, which all look exactly the
+/// same.
 fn format() -> Vec<Component<'static>> {
     vec![
         Component::Function {
@@ -391,6 +423,8 @@ fn format() -> Vec<Component<'static>> {
     ]
 }
 
+
+/// Print the given message, and exit the program, returning failure.
 fn fail(message: &str) -> ! {
     println!("{}", message);
     process::exit(1);
