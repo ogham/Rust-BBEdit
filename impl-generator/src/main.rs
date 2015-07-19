@@ -302,6 +302,53 @@ fn get_components(trait_name: &str) -> Option<Vec<Component<'static>>> {
             },
         ],
 
+        "ExactLenIterator" => vec![
+            Function {
+                name:  "len",
+                input: "&self",
+                output: Some("usize"),
+                params: None,
+            },
+        ],
+
+        "FromIterator" => vec![
+            Function {
+                name:  "from_iter",
+                input: "iterator: T",
+                output: Some("SELF"),
+                params: Some("T: IntoIterator<Item=PARAM>"),
+            },
+        ],
+
+        "DoubleEndedIterator" => vec![
+            Function {
+                name:  "next_back",
+                input: "&mut self",
+                output: Some("Option<Self::Item>"),
+                params: None,
+            },
+        ],
+
+        "IntoIterator" => vec![
+            AssocType("Item"),
+            AssocType("IntoIter"),
+            Function {
+                name:  "into_iter",
+                input: "self",
+                output: Some("Self::IntoIter"),
+                params: None,
+            }
+        ],
+
+        "Extend" => vec![
+            Function {
+                name: "extend",
+                input: "&mut self, iterable: T",
+                output: None,
+                params: Some("T: IntoIterator<Item=PARAM>"),
+            }
+        ],
+
         // -- std::ops --
 
         "Add"    => maths("add"),
