@@ -7,21 +7,23 @@ use std::process;
 use std::string::ToString;
 
 
+pub static REGEX: &'static str = r##"(?x)
+    ^ impl
+    (?: < .+ >)? \s+
+
+    ([A-Za-z0-9_:]+)
+    (< .+ >)? \s+
+
+    for \s+
+
+    ([A-Za-z0-9_:]+)
+    (< .+ >)? \s*
+
+    \{? $
+"##;
+
 fn main() {
-    let regex = Regex::new(r##"(?x)
-        ^ impl
-        (?: < [^>]+ >)? \s+
-
-        ([A-Za-z0-9_:]+)
-        (< [^>]+ >)? \s+
-
-        for \s+
-
-        ([A-Za-z0-9_:]+)
-        (< [^>]+ >)? \s*
-
-        \{? $
-    "##).unwrap();
+    let regex = Regex::new(REGEX).unwrap();
 
     let stdin = io::stdin();
     let line = stdin.lock().lines().next().unwrap_or_else(||fail("Failed to read line")).unwrap();
@@ -394,3 +396,39 @@ fn fail(message: &str) -> ! {
     process::exit(1);
 }
 
+
+#[cfg(test)]
+mod test {
+    use regex::Regex;
+    use super::*;
+
+    #[test]
+    fn base() {
+        let regex = Regex::new(REGEX).unwrap();
+        assert!(regex.is_match("impl Foo for Bar"));
+    }
+
+    #[test]
+    fn open_bracket() {
+        let regex = Regex::new(REGEX).unwrap();
+        assert!(regex.is_match("impl Foo for Bar {"));
+    }
+
+    #[test]
+    fn generics() {
+        let regex = Regex::new(REGEX).unwrap();
+        assert!(regex.is_match("impl<'a> Foo<'a> for Bar<'a>"));
+    }
+
+    #[test]
+    fn more_generics() {
+        let regex = Regex::new(REGEX).unwrap();
+        assert!(regex.is_match("impl<'a, T> Foo<'a, T> for Bar<'a, T>"));
+    }
+
+    #[test]
+    fn generic_generics() {
+        let regex = Regex::new(REGEX).unwrap();
+        assert!(regex.is_match("impl<T<'a>> Foo<T<'a>> for Bar<T<'a>>"));
+    }
+}
