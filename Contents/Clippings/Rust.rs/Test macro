@@ -1,8 +1,8 @@
 #indent#macro_rules! #placeholderstart#name#placeholderend# {
-    ($name: ident: $input: expr => $result: expr) => {
+    ($name:ident: $input:expr => $result:expr) => {
         #[test]
         fn $name() {
-            assert_eq!($input, $result)
+            assert_eq!($input, $result);
         }
     };
 }
