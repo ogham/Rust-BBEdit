@@ -463,7 +463,7 @@ fn format() -> Vec<Component<'static>> {
     vec![
         Component::Function {
             name: "fmt",
-            input: "&self, &mut fmt::Formatter",
+            input: "&self, f: &mut fmt::Formatter",
             output: Some("Result<(), fmt::Error>"),
             params: None,
         }
