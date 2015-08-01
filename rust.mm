@@ -31,7 +31,7 @@ SInt32 skipString(BBLMTextIterator &iter)
 {
     SInt32 length = 1;
     UniChar ch;
-    
+
     if (iter.strcmp("\"", 1) == 0)
     {
         iter += 1;
@@ -63,7 +63,7 @@ SInt32 skipRawString(BBLMTextIterator &iter)
 {
     SInt32 length = 4;
     UniChar ch;
-    
+
     if (iter.strcmp("r##\"", 4) == 0)
     {
         iter += 4;
@@ -72,7 +72,7 @@ SInt32 skipRawString(BBLMTextIterator &iter)
     {
         return 0;
     }
-    
+
     while ((ch = iter.GetNextChar()))
     {
         length++;
@@ -82,14 +82,14 @@ SInt32 skipRawString(BBLMTextIterator &iter)
             iter += 3;
             break;
         }
-        
+
         if (ch == '\\')
         {
             iter++;
             length++;
         }
     }
-    
+
     return length;
 }
 
@@ -198,7 +198,7 @@ SInt32 skipAttribute(BBLMTextIterator &iter)
     {
         return 0;
     }
-    
+
     while ((ch = iter.GetNextChar()))
     {
         if (ch == ']')
@@ -276,10 +276,10 @@ SInt32 skipNumber(BBLMTextIterator &iter)
         else if (ch == 'f' || ch == 'u' || ch == 'i')
         {
             length++;
-            if (ch != 'f' && iter.strcmp("s", 1) == 0)
+            if (ch != 'f' && iter.strcmp("size", 4) == 0)
             {
-                // Parse 'us' or 'is' machine-dependent suffixes
-                length++;
+                // Parse 'usize' or 'isize' machine-dependent suffixes
+                length += 4;
             }
             else
             {
@@ -402,7 +402,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
             iter -= keywordLen + whitespaceLen;
             return 0;
         }
-        
+
         SInt32 start_of_name = iter.Offset();
         SInt32 start_of_function;
         while ((ch = iter.GetNextChar()))
@@ -423,7 +423,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                         break;
                     }
                 }
-                
+
                 iter--;
                 start_of_function = iter.Offset();
                 break;
@@ -442,9 +442,9 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                 return 0;
             }
         }
-        
+
         UInt32 funLen = skipToEndOfFunction(iter);
-        
+
         // Skip over trait method definitions and extern functions
         if (funLen == 0)
         {
@@ -453,7 +453,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
 
         UInt32 tokenOffset, funIndex;
         UInt32 nameLen;
-        
+
         iter -= (wordLen + funLen);
         iter -= (keywordLen + whitespaceLen);
 
@@ -482,7 +482,7 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
         // But still allow the user to fold them
         // (the length changes here are to cut off the opening { and closing } from the fold range
         bblmAddFoldRange(callbacks, start_of_function + 1, funLen - 2, kBBLMFunctionAutoFold);
-        
+
         iter += (keywordLen + whitespaceLen);
         return info.fFunctionEnd;
     }
@@ -610,13 +610,13 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!makeCodeRun(iter, runStart, *callbacks)) return noErr;
             runStart = iter.Offset();
             runLen = skipRawString(iter);
-            
+
             // Use the heredoc colour to highlight raw strings.
             // It's not exactly a heredoc, but it's the closest!
             if (!addRun(kBBLMHereDocStringRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
-        
+
         else if (ch == '"')
         {
             iter--;
@@ -807,18 +807,18 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
                             {
                                 break;
                             }
-                            
+
                             if (iter.strcmp(" as ", 4) == 0)
                             {
                                 if (!addRun(kBBLMFileIncludeRunKind, runStart, runLen, *callbacks)) return noErr;
                                 runStart = iter.Offset();
                                 iter += 4;
                                 if (!addRun(kBBLMCodeRunKind, runStart, 4, *callbacks)) return noErr;
-                                
+
                                 runStart = iter.Offset();
                                 runLen = skipWord(iter);
                                 if (!addRun(moduleColour, runStart, runLen, *callbacks)) return noErr;
-                                
+
                                 iter++;
                                 runLen = 0;
                                 break;
@@ -882,7 +882,7 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             if (!addRun(kBBLMPreprocessorRunKind, runStart, runLen, *callbacks)) return noErr;
             runStart = iter.Offset();
         }
-        
+
         else if (ch == '$')
         {
             iter--;

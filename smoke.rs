@@ -94,13 +94,14 @@
   123i32,  123u32   // numbers can have literals
   123_u32, 0xff_u8
   0o70_i16, 0b1111_1111_1001_0000_i32
-  0us, 7is
+  0usize, 7isize
 
   123.0f64
   0.1f64
   0.1f32
   12E+99_f64
-  2.f64  // Invalid!
+  0us, 7is  // Invalid!
+  2.f64     // Also invalid!
 
 // Attributes
 // ----------
