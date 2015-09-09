@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BBEditDocumentType</key>
+	<string>CodelessLanguageModule</string>
+	<key>BBLMColorsSyntax</key>
+	<true/>
+	<key>BBLMIsCaseSensitive</key>
+	<true/>
+	<key>BBLMKeywords</key>
+	<array>
+		<dict>
+			<key>RunKind</key>
+			<string>com.barebones.bblm.predefined-symbol</string>
+
+			<key>Keywords</key>
+			<array>
+				<string>true</string>
+				<string>false</string>
+			</array>
+		</dict>
+	</array>
+
+    <key>BBLMKeywordPatterns</key>
+    <array>
+		<dict>
+			<key>RunKind</key>
+			<string>com.barebones.bblm.sgml-tag</string>
+
+			<key>Pattern</key>
+			<string>^\[.*\]$</string>
+		</dict>
+	</array>
+
+    <key>BBLMSuffixMap</key>
+	<array>
+		<dict>
+			<key>BBLMLanguageSuffix</key>
+			<string>.toml</string>
+		</dict>
+	</array>
+
+	<key>BBLMLanguageCode</key>
+	<string>TOML</string>
+	<key>BBLMLanguageDisplayName</key>
+	<string>TOML</string>
+	<key>BBLMScansFunctions</key>
+	<false/>
+	<key>Language Features</key>
+	<dict>
+		<key>Close Strings 1</key>
+		<string>'</string>
+		<key>Close Strings 2</key>
+		<string>"</string>
+		<key>End-of-line Ends Strings 1</key>
+		<false/>
+		<key>End-of-line Ends Strings 2</key>
+		<false/>
+		<key>Escape Char in Strings 1</key>
+		<string>\</string>
+		<key>Escape Char in Strings 2</key>
+		<string>\</string>
+		<key>Identifier and Keyword Characters</key>
+		<string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_.-abcdefghijklmnopqrstuvwxyz[]</string>
+		<key>Open Line Comments</key>
+		<string>#</string>
+		<key>Open Parameter Lists</key>
+		<string>{</string>
+		<key>Open Statement Blocks</key>
+		<string>{</string>
+		<key>Open Strings 1</key>
+		<string>'</string>
+		<key>Open Strings 2</key>
+		<string>"</string>
+	</dict>
+</dict>
+</plist>
