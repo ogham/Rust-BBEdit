@@ -39,6 +39,10 @@
 			<key>BBLMLanguageSuffix</key>
 			<string>.toml</string>
 		</dict>
+		<dict>
+			<key>BBLMLanguageSuffix</key>
+			<string>.lock</string>
+		</dict>
 	</array>
 
 	<key>BBLMLanguageCode</key>
