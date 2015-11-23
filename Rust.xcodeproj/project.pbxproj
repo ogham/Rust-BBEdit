@@ -49,7 +49,6 @@
 			name = Rust;
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = "Hello World";
-			productReference = B57F6C2519FD60C000FDB959 /* Rust.bblm */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -100,7 +99,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Rust;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.10;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "/Volumes/BBEdit\\ SDK/Interfaces/Language\\ Modules/";
 				WRAPPER_EXTENSION = bblm;
 			};
@@ -117,7 +116,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Rust;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.10;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "/Volumes/BBEdit\\ SDK/Interfaces/Language\\ Modules/";
 				WRAPPER_EXTENSION = bblm;
 			};

@@ -113,6 +113,12 @@
 
   #[macro_use] use this_is_not_an_attribute;
 
+  #[unfinished_attribute                      // not a comment
+  and this should be back to regular code.    // back to comments again
+
+  #[unfinished_attribute="but look \          // not a comment
+                          a string!"]         // back to comments again
+
 // Macros
 // ------
 

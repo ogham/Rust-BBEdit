@@ -206,6 +206,12 @@ SInt32 skipAttribute(BBLMTextIterator &iter)
             length++;
             break;
         }
+        else if (ch == '"')
+        {
+            // We only want to skip newlines in attributes if they're within a string.
+            iter--;
+            length += skipString(iter);
+        }
         else if (ch == '\n' || ch == '\r')
         {
             break;
