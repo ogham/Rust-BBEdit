@@ -85,8 +85,11 @@
   5.974e24          // lowercase e
   7.348e+22         // uppercase E and plus
 
+   .1234            // no leading zero (invalid)
+
   let tuple = ((8, 4), 48);
-  let a = tuple.0.0;
+  tuple.0
+  tuple.0.0         // tuple indexing (not really numbers)
 
 // Numeric Suffixes
 // ----------------

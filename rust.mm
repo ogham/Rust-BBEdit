@@ -939,7 +939,9 @@ OSErr calculateRuns(BBLMParamBlock &params, const BBLMCallbackBlock *callbacks)
             runStart = iter.Offset();
         }
 
-        wordchr = isalpha(ch) || isdigit(ch) || ch == '_';
+        // '.' is considered a word char to avoid the "0.0" in "tuple.0.0"
+        // being classified as a floating-point number.
+        wordchr = isalpha(ch) || isdigit(ch) || ch == '_' || ch == '.';
     }
 
     makeCodeRun(iter, runStart, *callbacks);
