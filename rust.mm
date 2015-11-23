@@ -979,9 +979,13 @@ OSErr guessLanguage(BBLMParamBlock &params)
 {
     BBLMTextIterator iter(params);
 
-    if (iter.strcmp("use ", 4) == 0 || iter.strcmp("#![crate_id", 11) == 0)
+    if (iter.strcmp("#![crate_name", 13) == 0)
     {
         params.fGuessLanguageParams.fGuessResult = kBBLMGuessDefiniteYes;
+    }
+    else if (iter.strcmp("use ", 4) == 0 || iter.strcmp("//! ", 4) == 0)
+    {
+        params.fGuessLanguageParams.fGuessResult = kBBLMGuessMaybe;
     }
 
     return noErr;
