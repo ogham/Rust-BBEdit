@@ -1,0 +1,3 @@
+#INDENT#static #PLACEHOLDERSTART#NAME#PLACEHOLDEREND#: &'static [&'static str] = &[
+    #PLACEHOLDERSTART#...#PLACEHOLDEREND#
+];

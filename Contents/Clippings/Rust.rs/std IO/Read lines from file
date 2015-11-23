@@ -1,0 +1,7 @@
+#INDENT#let mut f = try!(File::open("log.txt"));
+let mut reader = BufReader::new(f);
+
+for line in reader.lines() {
+    let line = line.unwrap();
+    #PLACEHOLDERSTART#...#PLACEHOLDEREND#
+}
