@@ -1,0 +1,12 @@
+[package]
+name = "rust-bbedit-helpers"
+version = "0.1.0"
+authors = ["Ben S <ogham@bsago.me>"]
+
+[[bin]]
+name = "impl-generator"
+path = "src/impl-generator.rs"
+test = true
+
+[dependencies]
+regex = "*"

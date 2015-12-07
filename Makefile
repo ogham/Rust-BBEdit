@@ -1,7 +1,7 @@
 all:
 	xcodebuild -configuration Release
 	cp -r build/Release/Rust.bblm Contents/"Language Modules"
-	cd impl-generator; cargo build --release; cp target/release/impl-generator ../Contents/Resources/impl-generator-bin
+	cd helper-tool; cargo build --release; cp target/release/impl-generator ../Contents/Resources/impl-generator
 
 clean:
-	rm -r build
+	rm -r build; cd helper-tool; cargo clean
