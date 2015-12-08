@@ -10,14 +10,20 @@ This is a BBEdit 11 Package for [Rust](http://www.rust-lang.org). It provides th
     - Customisable colours using the [BBEdit 11 colour editor](http://barebones.com/products/bbedit/bbedit11.html)
 - Language features
     - Go to start of/end of/previous/next function
-    - Go to named symbol
+    - Go to symbol
+    - [Find in Reference support](https://github.com/ogham/Rust-BBEdit/wiki/Find-in-Reference)
     - Indexed function menu
     - Code folding
-- Code helpers
+- Integration and helpers
+    - [Rustdoc preview](https://github.com/ogham/Rust-BBEdit/wiki/Rustdoc-Preview) to check your docs’ Markdown syntax
     - Clippings for common code patterns
-    - Autogeneration for standard library trait impls
+    - [Implementation generator](https://github.com/ogham/Rust-BBEdit/wiki/impl-Generator) for standard library traits
+    - [TOML support](https://github.com/ogham/Rust-BBEdit/wiki/TOML) for Cargo and suchlike
+    - [rustfmt support](https://github.com/ogham/Rust-BBEdit/wiki/rustfmt)
+    - [Cargo build scripts](https://github.com/ogham/Rust-BBEdit/wiki/Cargo)
 
-By default, it highlights anything beginning with a capital letter in a certain colour. To turn this off, just change the Identifier colour to be the same as the default text colour in Preferences.
+See the Wiki pages for more information and screenshots.
+
 
 ### Installation
 
@@ -29,6 +35,13 @@ $ git clone https://github.com/ogham/Rust-BBEdit.git ~/Library/Application\ Supp
 
 Then restart your BBEdit and it should be picked up. It’s necessary for the filename to end in `.bbpackage`.
 
+Alternatively, just [download this .zip of the source](https://github.com/ogham/Rust-BBEdit/archive/master.zip) and extract it to that directory.
+
+
 ### Compilation
 
-To compile your own version, you’ll need Xcode. The default schema outputs a `.bblm`. You’ll also need the BBEdit SDK. The project assumes it’s mounted under `/Volumes/BBEdit SDK`. There’s a `Makefile` that runs the build commands.
+To compile your own version, you’ll need Xcode, Rust, and Cargo. The default schema outputs a `.bblm`, and comes with a Run build step so you can debug the module while BBEdit is running. You’ll also need the [BBEdit SDK](http://www.barebones.com/support/develop/). The project assumes it’s mounted under `/Volumes/BBEdit SDK`.
+
+Once you’ve got all that set up, simply run `make` and it’ll compile the language module and Rust helper tools for you.
+
+Note that compiled versions of these tools already exist in the repository—you won’t be generating anything that doesn’t already exist!
