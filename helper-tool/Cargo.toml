@@ -4,9 +4,15 @@ version = "0.1.0"
 authors = ["Ben S <ogham@bsago.me>"]
 
 [[bin]]
+name = "doc-splitter"
+path = "src/doc-splitter.rs"
+test = true
+
+[[bin]]
 name = "impl-generator"
 path = "src/impl-generator.rs"
 test = true
 
 [dependencies]
-regex = "*"
+regex = "0.1"
+hoedown = "3.0"

@@ -1,0 +1,72 @@
+/*
+ * These styles are a poor imitation of the standard rustdoc styles. They should
+ * contain just enough to look more-or-less like rustdoc’s output, but large
+ * parts of the official stylesheet aren’t relevant, and I’m not even sure if
+ * I’m allowed to distribute its webfonts! So this will have to do.
+ */
+
+body {
+    padding: 0;
+    margin: 0;
+    font: 16px/1.4 Georgia;  /* Georgia is like Source Serif Pro, right? */
+}
+
+.docs pre, .docs code, .docs span {
+    font-family: Monaco;  /* Monaco is like Source Code Pro, right? */
+    font-size: 12px;
+}
+
+.docs {
+    padding: 20px 20px 10px 20px;
+    color: #333;
+}
+
+.docs.module {
+    background-color: #F7F3F7;
+    border-bottom: 1px solid #D8CAD8;
+}
+
+/*
+ * We want to keep the docs above a piece of code close to that code in the
+ * preview, as docs usually refer to the code below them.
+ */
+
+.code {
+    border-top: 1px solid #BDC3C7;
+    border-bottom: 1px solid #BDC3C7;
+    background-color: #ECF0F1;
+
+    font-size: 10px;
+    font-family: Monaco;
+    color: #666;
+
+    padding: 10px 20px;
+    margin: 0em;
+}
+
+p:last-child {
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * The headings have borders below them, just like rustdoc!
+ */
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+h1, h2, h3 {
+    font-family: "Helvetica Neue";  /* Helvetica is like Fira Sans, right? */
+    border-bottom: 1px solid #ddd;
+
+    color: #000;
+    font-weight: 500;
+    margin: 20px 0 15px 0;
+    padding-bottom: 6px;
+}
