@@ -1,277 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-        <key>BuildMachineOSBuild</key>
-        <string>15B42</string>
-
-        <key>CFBundleDevelopmentRegion</key>
-        <string>English</string>
-
-        <key>CFBundleExecutable</key>
-        <string>Rust</string>
-
-        <key>CFBundleIdentifier</key>
-        <string>me.bsago.bblm.rust</string>
-
-        <key>CFBundleInfoDictionaryVersion</key>
-        <string>6.0</string>
-
-        <key>CFBundlePackageType</key>
-        <string>BNDL</string>
-
-        <key>CFBundleSignature</key>
-        <string>BBLM</string>
-
-        <key>CFBundleSupportedPlatforms</key>
-        <array>
-            <string>MacOSX</string>
-        </array>
-
-        <key>CFBundleVersion</key>
-        <string>8.0</string>
-
-        <key>CSResourcesFileMapped</key>
-        <true/>
-
-        <key>DTCompiler</key>
-        <string>com.apple.compilers.llvm.clang.1_0</string>
-
-        <key>DTPlatformBuild</key>
-        <string>7B91b</string>
-
-        <key>DTPlatformVersion</key>
-        <string>GM</string>
-
-        <key>DTSDKBuild</key>
-        <string>15A278</string>
-
-        <key>DTSDKName</key>
-        <string>macosx10.11</string>
-
-        <key>DTXcode</key>
-        <string>0710</string>
-
-        <key>DTXcodeBuild</key>
-        <string>7B91b</string>
-
-        <key>com.barebones.bblminfo</key>
-        <array>
-            <dict>
-                <key>BBLMCanGuessLanguage</key>
-                <true/>
-
-                <key>BBLMColorsSyntax</key>
-                <true/>
-
-                <key>BBLMCommentLineDefault</key>
-                <string>// </string>
-
-                <key>BBLMCommentPrefixDefault</key>
-                <string>/* </string>
-
-                <key>BBLMCommentSuffixDefault</key>
-                <string> */</string>
-
-                <key>BBLMDroppedFilePathStyle</key>
-                <string>POSIX</string>
-
-                <key>BBLMEntryPointName</key>
-                <string>rustMain</string>
-
-                <key>BBLMFunctionScannerDoesFoldsToo</key>
-                <true/>
-
-                <key>BBLMIsCaseSensitive</key>
-                <true/>
-
-                <key>BBLMKeywords</key>
-                <array>
-                    <dict>
-                        <key>Keywords</key>
-                        <array>
-                            <string>abstract</string>
-                            <string>alignof</string>
-                            <string>as</string>
-                            <string>become</string>
-                            <string>box</string>
-                            <string>break</string>
-                            <string>const</string>
-                            <string>continue</string>
-                            <string>crate</string>
-                            <string>do</string>
-                            <string>else</string>
-                            <string>enum</string>
-                            <string>extern</string>
-                            <string>false</string>
-                            <string>final</string>
-                            <string>fn</string>
-                            <string>for</string>
-                            <string>if</string>
-                            <string>impl</string>
-                            <string>in</string>
-                            <string>let</string>
-                            <string>loop</string>
-                            <string>macro</string>
-                            <string>macro_rules</string>
-                            <string>match</string>
-                            <string>mod</string>
-                            <string>move</string>
-                            <string>mut</string>
-                            <string>offsetof</string>
-                            <string>override</string>
-                            <string>priv</string>
-                            <string>proc</string>
-                            <string>pub</string>
-                            <string>pure</string>
-                            <string>ref</string>
-                            <string>return</string>
-                            <string>self</string>
-                            <string>sizeof</string>
-                            <string>static</string>
-                            <string>struct</string>
-                            <string>super</string>
-                            <string>trait</string>
-                            <string>true</string>
-                            <string>type</string>
-                            <string>typeof</string>
-                            <string>unsafe</string>
-                            <string>unsized</string>
-                            <string>use</string>
-                            <string>virtual</string>
-                            <string>where</string>
-                            <string>while</string>
-                            <string>yield</string>
-                        </array>
-
-                        <key>RunKind</key>
-                        <string>com.barebones.bblm.keyword</string>
-                    </dict>
-
-                    <dict>
-                        <key>Keywords</key>
-                        <array>
-                            <string>blkcnt_t</string>
-                            <string>blksize_t</string>
-                            <string>bool</string>
-                            <string>c_char</string>
-                            <string>c_double</string>
-                            <string>c_float</string>
-                            <string>c_int</string>
-                            <string>c_long</string>
-                            <string>c_schar</string>
-                            <string>c_short</string>
-                            <string>c_uchar</string>
-                            <string>c_uint</string>
-                            <string>c_ulong</string>
-                            <string>c_ushort</string>
-                            <string>char</string>
-                            <string>clock_t</string>
-                            <string>dev_t</string>
-                            <string>f32</string>
-                            <string>f64</string>
-                            <string>float</string>
-                            <string>gid_t</string>
-                            <string>i16</string>
-                            <string>i32</string>
-                            <string>i64</string>
-                            <string>i8</string>
-                            <string>ino_t</string>
-                            <string>isize</string>
-                            <string>mode_t</string>
-                            <string>nlink_t</string>
-                            <string>off_t</string>
-                            <string>pid_t</string>
-                            <string>ptrdiff_t</string>
-                            <string>size_t</string>
-                            <string>str</string>
-                            <string>suseconds_t</string>
-                            <string>time_t</string>
-                            <string>u16</string>
-                            <string>u32</string>
-                            <string>u64</string>
-                            <string>u8</string>
-                            <string>uid_t</string>
-                            <string>usize</string>
-                            <string>wchar_t</string>
-                        </array>
-
-                        <key>RunKind</key>
-                        <string>com.barebones.bblm.predefined-symbol</string>
-                    </dict>
-                </array>
-
-                <key>BBLMLanguageCode</key>
-                <string>Rust</string>
-
-                <key>BBLMLanguageDisplayName</key>
-                <string>Rust</string>
-
-                <key>BBLMNonSpellableRunKinds</key>
-                <array>
-                    <string>com.barebones.bblm.code</string>
-                    <string>com.barebones.bblm.double-string</string>
-                </array>
-
-                <key>BBLMRunColors</key>
-                <dict>
-                    <key>me.bsago.bblm.rust.function</key>
-                    <string>rgb(219, 135, 2)</string>
-
-                    <key>me.bsago.bblm.rust.identifier</key>
-                    <string>rgb(61, 153, 112)</string>
-
-                    <key>me.bsago.bblm.rust.lifetime</key>
-                    <string>rgb(133, 20, 75)</string>
-
-                    <key>me.bsago.bblm.rust.module</key>
-                    <string>rgb(135, 2, 219)</string>
-                </dict>
-
-                <key>BBLMRunNames</key>
-                <dict>
-                    <key>me.bsago.bblm.rust.function</key>
-                    <string>fn functionname</string>
-
-                    <key>me.bsago.bblm.rust.identifier</key>
-                    <string>Identifier</string>
-
-                    <key>me.bsago.bblm.rust.lifetime</key>
-                    <string>'lifetime</string>
-
-                    <key>me.bsago.bblm.rust.module</key>
-                    <string>mod modulename</string>
-                </dict>
-
-                <key>BBLMScansFunctions</key>
-                <true/>
-
-                <key>BBLMSpellableRunKinds</key>
-                <array>
-                    <string>com.barebones.bblm.line-comment</string>
-                    <string>com.barebones.bblm.block-comment</string>
-                </array>
-
-                <key>BBLMReferenceSearchURLTemplate</key>
-                <string>https://doc.rust-lang.org/std/?search=__SYMBOLNAME__</string>
-
-                <key>BBLMSuffixMap</key>
-                <array>
-                    <dict>
-                        <key>BBLMLanguageSuffix</key>
-                        <string>.rs</string>
-
-                        <key>BBLMIsSourceKind</key>
-                        <true/>
-
-                        <key>BBLMIsHeaderKind</key>
-                        <false/>
-                    </dict>
-                </array>
-
-                <key>BBLMUseHTMLFileSearchRules</key>
-                <false/>
-            </dict>
-        </array>
-    </dict>
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>17G4015</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Rust</string>
+	<key>CFBundleIdentifier</key>
+	<string>me.bsago.bblm.rust</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>BBLM</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>8.0</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>10B61</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>18B71</string>
+	<key>DTSDKName</key>
+	<string>macosx10.14</string>
+	<key>DTXcode</key>
+	<string>1010</string>
+	<key>DTXcodeBuild</key>
+	<string>10B61</string>
+	<key>com.barebones.bblminfo</key>
+	<array>
+		<dict>
+			<key>BBLMCanGuessLanguage</key>
+			<true/>
+			<key>BBLMColorsSyntax</key>
+			<true/>
+			<key>BBLMCommentLineDefault</key>
+			<string>// </string>
+			<key>BBLMCommentPrefixDefault</key>
+			<string>/* </string>
+			<key>BBLMCommentSuffixDefault</key>
+			<string> */</string>
+			<key>BBLMDroppedFilePathStyle</key>
+			<string>POSIX</string>
+			<key>BBLMEntryPointName</key>
+			<string>rustMain</string>
+			<key>BBLMFunctionScannerDoesFoldsToo</key>
+			<true/>
+			<key>BBLMIsCaseSensitive</key>
+			<true/>
+			<key>BBLMKeywords</key>
+			<array>
+				<dict>
+					<key>Keywords</key>
+					<array>
+						<string>abstract</string>
+						<string>alignof</string>
+						<string>as</string>
+						<string>become</string>
+						<string>box</string>
+						<string>break</string>
+						<string>const</string>
+						<string>continue</string>
+						<string>crate</string>
+						<string>do</string>
+						<string>else</string>
+						<string>enum</string>
+						<string>extern</string>
+						<string>false</string>
+						<string>final</string>
+						<string>fn</string>
+						<string>for</string>
+						<string>if</string>
+						<string>impl</string>
+						<string>in</string>
+						<string>let</string>
+						<string>loop</string>
+						<string>macro</string>
+						<string>macro_rules</string>
+						<string>match</string>
+						<string>mod</string>
+						<string>move</string>
+						<string>mut</string>
+						<string>offsetof</string>
+						<string>override</string>
+						<string>priv</string>
+						<string>proc</string>
+						<string>pub</string>
+						<string>pure</string>
+						<string>ref</string>
+						<string>return</string>
+						<string>self</string>
+						<string>sizeof</string>
+						<string>static</string>
+						<string>struct</string>
+						<string>super</string>
+						<string>trait</string>
+						<string>true</string>
+						<string>type</string>
+						<string>typeof</string>
+						<string>unsafe</string>
+						<string>unsized</string>
+						<string>use</string>
+						<string>virtual</string>
+						<string>where</string>
+						<string>while</string>
+						<string>yield</string>
+					</array>
+					<key>RunKind</key>
+					<string>com.barebones.bblm.keyword</string>
+				</dict>
+				<dict>
+					<key>Keywords</key>
+					<array>
+						<string>blkcnt_t</string>
+						<string>blksize_t</string>
+						<string>bool</string>
+						<string>c_char</string>
+						<string>c_double</string>
+						<string>c_float</string>
+						<string>c_int</string>
+						<string>c_long</string>
+						<string>c_schar</string>
+						<string>c_short</string>
+						<string>c_uchar</string>
+						<string>c_uint</string>
+						<string>c_ulong</string>
+						<string>c_ushort</string>
+						<string>char</string>
+						<string>clock_t</string>
+						<string>dev_t</string>
+						<string>f32</string>
+						<string>f64</string>
+						<string>float</string>
+						<string>gid_t</string>
+						<string>i16</string>
+						<string>i32</string>
+						<string>i64</string>
+						<string>i8</string>
+						<string>ino_t</string>
+						<string>isize</string>
+						<string>mode_t</string>
+						<string>nlink_t</string>
+						<string>off_t</string>
+						<string>pid_t</string>
+						<string>ptrdiff_t</string>
+						<string>size_t</string>
+						<string>str</string>
+						<string>suseconds_t</string>
+						<string>time_t</string>
+						<string>u16</string>
+						<string>u32</string>
+						<string>u64</string>
+						<string>u8</string>
+						<string>uid_t</string>
+						<string>usize</string>
+						<string>wchar_t</string>
+					</array>
+					<key>RunKind</key>
+					<string>com.barebones.bblm.predefined-symbol</string>
+				</dict>
+			</array>
+			<key>BBLMLanguageCode</key>
+			<string>Rust</string>
+			<key>BBLMLanguageDisplayName</key>
+			<string>Rust</string>
+			<key>BBLMNonSpellableRunKinds</key>
+			<array>
+				<string>com.barebones.bblm.code</string>
+				<string>com.barebones.bblm.double-string</string>
+			</array>
+			<key>BBLMRunColors</key>
+			<dict>
+				<key>me.bsago.bblm.rust.function</key>
+				<string>rgb(219, 135, 2)</string>
+				<key>me.bsago.bblm.rust.identifier</key>
+				<string>rgb(61, 153, 112)</string>
+				<key>me.bsago.bblm.rust.lifetime</key>
+				<string>rgb(133, 20, 75)</string>
+				<key>me.bsago.bblm.rust.module</key>
+				<string>rgb(135, 2, 219)</string>
+			</dict>
+			<key>BBLMRunNames</key>
+			<dict>
+				<key>me.bsago.bblm.rust.function</key>
+				<string>fn functionname</string>
+				<key>me.bsago.bblm.rust.identifier</key>
+				<string>Identifier</string>
+				<key>me.bsago.bblm.rust.lifetime</key>
+				<string>'lifetime</string>
+				<key>me.bsago.bblm.rust.module</key>
+				<string>mod modulename</string>
+			</dict>
+			<key>BBLMScansFunctions</key>
+			<true/>
+			<key>BBLMSpellableRunKinds</key>
+			<array>
+				<string>com.barebones.bblm.line-comment</string>
+				<string>com.barebones.bblm.block-comment</string>
+			</array>
+			<key>BBLMSuffixMap</key>
+			<array>
+				<dict>
+					<key>BBLMLanguageSuffix</key>
+					<string>.rs</string>
+				</dict>
+			</array>
+			<key>BBLMUseHTMLFileSearchRules</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
 </plist>
