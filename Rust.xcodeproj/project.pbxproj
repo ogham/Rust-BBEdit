@@ -95,13 +95,11 @@
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_MODE_FLAG = "ug+w,o-w,a+rX";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Rust;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Volumes/BBEdit\\ SDK/Interfaces/Language\\ Modules/";
+				USER_HEADER_SEARCH_PATHS = "${HOME}/Projects/BBEdit/LanguageModuleSDK/Interfaces";
 				WRAPPER_EXTENSION = bblm;
 			};
 			name = Debug;
@@ -113,13 +111,11 @@
 				COPY_PHASE_STRIP = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_MODE_FLAG = "ug+w,o-w,a+rX";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Rust;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "/Volumes/BBEdit\\ SDK/Interfaces/Language\\ Modules/";
+				USER_HEADER_SEARCH_PATHS = "${HOME}/Projects/BBEdit/LanguageModuleSDK/Interfaces";
 				WRAPPER_EXTENSION = bblm;
 			};
 			name = Release;
@@ -127,23 +123,14 @@
 		2E4F91D20863164B009D6578 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.10;
-				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
 		2E4F91D30863164B009D6578 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				SDKROOT = macosx10.10;
-				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};

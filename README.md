@@ -40,7 +40,7 @@ Alternatively, just [download this .zip of the source](https://github.com/ogham/
 
 ### Compilation
 
-To compile your own version, you’ll need Xcode, Rust, and Cargo. The default schema outputs a `.bblm`, and comes with a Run build step so you can debug the module while BBEdit is running. You’ll also need the [BBEdit SDK](http://www.barebones.com/support/develop/). The project assumes it’s mounted under `/Volumes/BBEdit SDK`.
+To compile your own version, you’ll need Xcode, Rust, and Cargo. The default schema outputs a `.bblm`, and comes with a Run build step so you can debug the module while BBEdit is running. You’ll also need the [BBEdit SDK](https://github.com/siegel/LanguageModuleSDK). The project assumes it’s available under `${HOME}/Projects/BBEdit/LanguageModuleSDK`.
 
 Once you’ve got all that set up, simply run `make` and it’ll compile the language module and Rust helper tools for you.
 
