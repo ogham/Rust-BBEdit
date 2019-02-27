@@ -392,9 +392,9 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
                      BBLMParamBlock &params,
                      const BBLMCallbackBlock *callbacks)
 {
-    SInt32 whitespaceLen, wordLen = 0, parametersLen = 0;
+    SInt32 whitespaceLen, wordLen = 0;
     UniChar ch;
-    int keywordLen = strlen(keyword);
+    size_t keywordLen = strlen(keyword);
 
     if (iter.strcmp(keyword, keywordLen) == 0)
     {
@@ -409,7 +409,6 @@ SInt32 scanForSymbol(BBLMTextIterator &iter,
             return 0;
         }
 
-        SInt32 start_of_name = iter.Offset();
         SInt32 start_of_function;
         while ((ch = iter.GetNextChar()))
         {
