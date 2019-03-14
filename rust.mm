@@ -539,7 +539,7 @@ static OSErr scanForFunctions(BBLMParamBlock &params, const BBLMCallbackBlock *c
 
             case 'e':
                 symbolToScanFor = "enum";
-                typeIfSo = kBBLMFunctionMark;
+                typeIfSo = kBBLMFunctionEnumDeclaration;
                 break;
 
             case 'f':
@@ -549,22 +549,22 @@ static OSErr scanForFunctions(BBLMParamBlock &params, const BBLMCallbackBlock *c
 
             case 'i':
                 symbolToScanFor = "impl";
-                typeIfSo = kBBLMTypedef;
+                typeIfSo = kBBLMFunctionClassImplementation;
                 break;
 
             case 'm':
                 symbolToScanFor = "mod";
-                typeIfSo = kBBLMFunctionMark;
+                typeIfSo = kBBLMFunctionMethod;  // it at least gets the 'm' right
                 break;
 
             case 's':
                 symbolToScanFor = "struct";
-                typeIfSo = kBBLMFunctionMark;
+                typeIfSo = kBBLMFunctionStructDeclaration;
                 break;
 
             case 't':
                 symbolToScanFor = "trait";
-                typeIfSo = kBBLMFunctionMark;
+                typeIfSo = kBBLMFunctionClassInterface;
                 break;
         }
 
