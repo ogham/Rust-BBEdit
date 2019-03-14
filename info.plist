@@ -100,6 +100,7 @@
                         <string>trait</string>
                         <string>true</string>
                         <string>type</string>
+                        <string>union</string>
                         <string>unsafe</string>
                         <string>use</string>
                         <string>where</string>

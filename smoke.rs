@@ -4,7 +4,7 @@
   // current
   as, break, const, continue, crate, dyn, else, enum, extern, false, fn, for,
   if, impl, in, let, loop, match, mod, move, mut, pub, ref, return, self,
-  static, struct, super, trait, true, type, unsafe, use, where, while.
+  static, struct, super, trait, true, type, union, unsafe, use, where, while.
 
   // reserved for future use
   abstract, async, become, box, do, final, macro, override, priv, try, typeof,
@@ -127,6 +127,24 @@
 
   #[unfinished_attribute="but look \          // not a comment
                           a string!"]         // back to comments again
+
+// Types
+// -----
+
+  struct Car {
+      person: Person,
+      drivey_bits: CarBits,
+  }
+
+  enum HatSize {
+      Small,
+      ComicallyOversized,
+  }
+
+  union MyUnion {
+      f1: u32,
+      f2: f32,
+  }
 
 // Macros
 // ------

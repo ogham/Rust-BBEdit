@@ -566,6 +566,11 @@ static OSErr scanForFunctions(BBLMParamBlock &params, const BBLMCallbackBlock *c
                 symbolToScanFor = "trait";
                 typeIfSo = kBBLMFunctionClassInterface;
                 break;
+            
+            case 'u':
+                symbolToScanFor = "union";
+                typeIfSo = kBBLMFunctionUnionDeclaration;
+                break;
         }
 
         if (symbolToScanFor != NULL)
