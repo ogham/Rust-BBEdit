@@ -64,21 +64,16 @@
 				<dict>
 					<key>Keywords</key>
 					<array>
-						<string>abstract</string>
-						<string>alignof</string>
 						<string>as</string>
-						<string>become</string>
-						<string>box</string>
 						<string>break</string>
 						<string>const</string>
 						<string>continue</string>
 						<string>crate</string>
-						<string>do</string>
+						<string>dyn</string>
 						<string>else</string>
 						<string>enum</string>
 						<string>extern</string>
 						<string>false</string>
-						<string>final</string>
 						<string>fn</string>
 						<string>for</string>
 						<string>if</string>
@@ -86,35 +81,37 @@
 						<string>in</string>
 						<string>let</string>
 						<string>loop</string>
-						<string>macro</string>
-						<string>macro_rules</string>
 						<string>match</string>
 						<string>mod</string>
 						<string>move</string>
 						<string>mut</string>
-						<string>offsetof</string>
-						<string>override</string>
-						<string>priv</string>
-						<string>proc</string>
 						<string>pub</string>
-						<string>pure</string>
 						<string>ref</string>
 						<string>return</string>
 						<string>self</string>
-						<string>sizeof</string>
 						<string>static</string>
 						<string>struct</string>
 						<string>super</string>
 						<string>trait</string>
 						<string>true</string>
 						<string>type</string>
-						<string>typeof</string>
 						<string>unsafe</string>
-						<string>unsized</string>
 						<string>use</string>
-						<string>virtual</string>
 						<string>where</string>
 						<string>while</string>
+						<string>abstract</string>
+						<string>async</string>
+						<string>become</string>
+						<string>box</string>
+						<string>do</string>
+						<string>final</string>
+						<string>macro</string>
+						<string>override</string>
+						<string>priv</string>
+						<string>try</string>
+						<string>typeof</string>
+						<string>unsized</string>
+						<string>virtual</string>
 						<string>yield</string>
 					</array>
 					<key>RunKind</key>
@@ -123,48 +120,96 @@
 				<dict>
 					<key>Keywords</key>
 					<array>
+						<string>bool</string>
+						<string>char</string>
+						<string>f32</string>
+						<string>f64</string>
+						<string>i8</string>
+						<string>i16</string>
+						<string>i32</string>
+						<string>i64</string>
+						<string>i128</string>
+						<string>isize</string>
+						<string>u8</string>
+						<string>u16</string>
+						<string>u32</string>
+						<string>u64</string>
+						<string>u128</string>
+						<string>usize</string>
+						<string>str</string>
 						<string>blkcnt_t</string>
 						<string>blksize_t</string>
-						<string>bool</string>
 						<string>c_char</string>
 						<string>c_double</string>
 						<string>c_float</string>
 						<string>c_int</string>
 						<string>c_long</string>
+						<string>c_longlong</string>
 						<string>c_schar</string>
 						<string>c_short</string>
 						<string>c_uchar</string>
 						<string>c_uint</string>
 						<string>c_ulong</string>
+						<string>c_ulonglong</string>
 						<string>c_ushort</string>
-						<string>char</string>
+						<string>c_void</string>
 						<string>clock_t</string>
+						<string>clockid_t</string>
 						<string>dev_t</string>
-						<string>f32</string>
-						<string>f64</string>
-						<string>float</string>
+						<string>fpos_t</string>
+						<string>fpos64_t</string>
+						<string>fsblkcnt_t</string>
+						<string>fsfilcnt_t</string>
 						<string>gid_t</string>
-						<string>i16</string>
-						<string>i32</string>
-						<string>i64</string>
-						<string>i8</string>
+						<string>greg_t</string>
+						<string>id_t</string>
+						<string>idtype_t</string>
+						<string>in_addr_t</string>
+						<string>in_port_t</string>
+						<string>ino64_t</string>
 						<string>ino_t</string>
-						<string>isize</string>
+						<string>int8_t</string>
+						<string>int16_t</string>
+						<string>int32_t</string>
+						<string>int64_t</string>
+						<string>intmax_t</string>
+						<string>intptr_t</string>
+						<string>key_t</string>
+						<string>locale_t</string>
+						<string>loff_t</string>
 						<string>mode_t</string>
+						<string>mqd_t</string>
+						<string>msglen_t</string>
+						<string>msgqnum_t</string>
+						<string>nfds_t</string>
+						<string>nl_item</string>
 						<string>nlink_t</string>
+						<string>off64_t</string>
 						<string>off_t</string>
 						<string>pid_t</string>
+						<string>pthread_key_t</string>
+						<string>pthread_t</string>
 						<string>ptrdiff_t</string>
+						<string>rlim64_t</string>
+						<string>rlim_t</string>
+						<string>sa_family_t</string>
+						<string>shmatt_t</string>
+						<string>sighandler_t</string>
 						<string>size_t</string>
-						<string>str</string>
+						<string>socklen_t</string>
+						<string>speed_t</string>
+						<string>ssize_t</string>
 						<string>suseconds_t</string>
+						<string>tcflag_t</string>
 						<string>time_t</string>
-						<string>u16</string>
-						<string>u32</string>
-						<string>u64</string>
-						<string>u8</string>
 						<string>uid_t</string>
-						<string>usize</string>
+						<string>uint8_t</string>
+						<string>uint16_t</string>
+						<string>uint32_t</string>
+						<string>uint64_t</string>
+						<string>uintmax_t</string>
+						<string>uintptr_t</string>
+						<string>useconds_t</string>
 						<string>wchar_t</string>
 					</array>
 					<key>RunKind</key>

@@ -1,10 +1,14 @@
 // Keywords
 // --------
 
-  abstract, alignof, as, become, box, break, const, continue, crate, do, else, enum,
-  extern, false, final, fn, for, if, impl, in, let, loop, macro, match, mod, move, mut,
-  offsetof, override, priv, pub, pure, ref, return, sizeof, static, self, struct, super,
-  true, trait, type, typeof, unsafe, unsized, use, virtual, where, while, yield.
+  // current
+  as, break, const, continue, crate, dyn, else, enum, extern, false, fn, for,
+  if, impl, in, let, loop, match, mod, move, mut, pub, ref, return, self,
+  static, struct, super, trait, true, type, unsafe, use, where, while.
+
+  // reserved for future use
+  abstract, async, become, box, do, final, macro, override, priv, try, typeof,
+  unsized, virtual, yield,
 
 // Types
 // -----
@@ -16,7 +20,9 @@
   - f32, f64
   - usize, isize
 
-  - int, uint    // these are no longer valid!
+  - int, uint       // these are no longer valid!
+
+  - size_t, c_void  // these are from libc
 
 // Comments
 // --------
